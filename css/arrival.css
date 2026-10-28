@@ -1,0 +1,2221 @@
+/* =========================================================
+   ÉLORA — NEW ARRIVALS
+   Premium Luxury Editorial Design
+========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+:root {
+    --arrival-bg: #f8f5ef;
+    --arrival-white: #fffdf9;
+    --arrival-dark: #29251f;
+    --arrival-muted: #81796e;
+    --arrival-gold: #b59661;
+    --arrival-gold-light: #dfcba5;
+    --arrival-border: #e7dfd2;
+    --arrival-serif: "Playfair Display", Georgia, serif;
+    --arrival-sans: "DM Sans", sans-serif;
+    --arrival-transition: 0.4s cubic-bezier(.22, .61, .36, 1);
+}
+
+.new-arrivals-page,
+.new-arrivals-page * {
+    box-sizing: border-box;
+}
+
+.new-arrivals-page {
+    margin: 0;
+    background: var(--arrival-bg);
+    color: var(--arrival-dark);
+    font-family: var(--arrival-sans);
+    font-size: 14px;
+    line-height: 1.7;
+    overflow-x: clip;
+}
+
+.new-arrivals-page img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+}
+
+.new-arrivals-page a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.new-arrivals-page button,
+.new-arrivals-page input {
+    font: inherit;
+}
+
+.new-arrivals-page button {
+    color: inherit;
+}
+
+.new-arrivals-page button:focus-visible,
+.new-arrivals-page a:focus-visible,
+.new-arrivals-page input:focus-visible {
+    outline: 2px solid var(--arrival-gold);
+    outline-offset: 4px;
+}
+
+.new-arrivals-page button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.new-arrivals-page h1,
+.new-arrivals-page h2,
+.new-arrivals-page h3,
+.new-arrivals-page p {
+    margin-top: 0;
+}
+
+.new-arrivals-page h1,
+.new-arrivals-page h2,
+.new-arrivals-page h3 {
+    font-weight: 400;
+}
+
+.new-arrivals-page h1,
+.new-arrivals-page h2 {
+    font-family: var(--arrival-serif);
+}
+
+.new-arrivals-page h1 em,
+.new-arrivals-page h2 em {
+    color: var(--arrival-gold);
+    font-weight: 400;
+}
+
+.new-arrivals-page .container {
+    width: min(1320px, calc(100% - 100px));
+    margin-inline: auto;
+}
+
+.new-arrivals-page .section-padding {
+    padding-block: 115px;
+}
+
+.new-arrivals-page .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.new-arrivals-page button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   SCROLL PROGRESS
+========================================================= */
+
+.new-arrivals-page .scroll-progress {
+    position: fixed;
+    inset: 0 auto auto 0;
+    width: 0;
+    height: 3px;
+    background: var(--arrival-gold);
+    z-index: 2000;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.new-arrivals-page .site-header {
+    position: relative;
+    z-index: 1000;
+    background: var(--arrival-bg);
+    border-bottom: 1px solid rgba(41, 37, 31, 0.08);
+    transition: box-shadow var(--arrival-transition);
+}
+
+.new-arrivals-page .site-header.header-scrolled {
+    box-shadow: 0 8px 30px rgba(41, 37, 31, 0.06);
+}
+
+.new-arrivals-page .nav-container {
+    min-height: 92px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 35px;
+}
+
+.new-arrivals-page .brand-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    flex-shrink: 0;
+}
+
+.new-arrivals-page .brand-symbol {
+    font-family: var(--arrival-serif);
+    font-size: 42px;
+    line-height: 1;
+    color: var(--arrival-gold);
+}
+
+.new-arrivals-page .brand-details {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3;
+}
+
+.new-arrivals-page .brand-name {
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: 4px;
+}
+
+.new-arrivals-page .brand-subtitle {
+    margin-top: 5px;
+    font-size: 8px;
+    letter-spacing: 2px;
+    color: var(--arrival-muted);
+}
+
+.new-arrivals-page .main-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(18px, 2.6vw, 38px);
+}
+
+.new-arrivals-page .nav-link {
+    position: relative;
+    padding-block: 12px;
+    color: #6f685e;
+    font-size: 12px;
+    transition: color 0.3s ease;
+}
+
+.new-arrivals-page .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 4px;
+    width: 0;
+    height: 1px;
+    background: var(--arrival-gold);
+    transition: width 0.3s ease;
+}
+
+.new-arrivals-page .nav-link:hover,
+.new-arrivals-page .nav-link.active {
+    color: var(--arrival-dark);
+}
+
+.new-arrivals-page .nav-link:hover::after,
+.new-arrivals-page .nav-link.active::after {
+    width: 100%;
+}
+
+.new-arrivals-page .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 19px;
+    flex-shrink: 0;
+}
+
+.new-arrivals-page .header-icon {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 35px;
+    height: 38px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.new-arrivals-page .header-icon:hover {
+    color: var(--arrival-gold);
+}
+
+.new-arrivals-page .wishlist-count {
+    position: absolute;
+    top: 0;
+    right: -4px;
+    display: grid;
+    place-items: center;
+    min-width: 16px;
+    height: 16px;
+    padding-inline: 4px;
+    border-radius: 50px;
+    background: var(--arrival-gold);
+    color: white;
+    font-size: 9px;
+}
+
+.new-arrivals-page .login-button {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 11px 17px;
+    border: 1px solid var(--arrival-border);
+    background: transparent;
+    font-size: 11px;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.new-arrivals-page .login-button:hover {
+    background: var(--arrival-dark);
+    color: white;
+}
+
+.new-arrivals-page .menu-toggle {
+    display: none;
+    width: 40px;
+    height: 40px;
+    padding: 9px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 7px;
+    border: 1px solid var(--arrival-border);
+    background: transparent;
+    cursor: pointer;
+}
+
+.new-arrivals-page .menu-toggle span {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: var(--arrival-dark);
+    transition: transform 0.3s ease;
+}
+
+.new-arrivals-page .menu-toggle[aria-expanded="true"] span:first-child {
+    transform: translateY(4px) rotate(45deg);
+}
+
+.new-arrivals-page .menu-toggle[aria-expanded="true"] span:last-child {
+    transform: translateY(-4px) rotate(-45deg);
+}
+
+
+/* =========================================================
+   MOBILE DRAWER
+========================================================= */
+
+.new-arrivals-page .mobile-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1100;
+    background: rgba(28, 25, 21, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.new-arrivals-page .mobile-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.new-arrivals-page .mobile-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1101;
+    width: min(390px, 88vw);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    background: var(--arrival-bg);
+    transform: translateX(105%);
+    visibility: hidden;
+    transition: transform 0.4s cubic-bezier(.22, .61, .36, 1),
+                visibility 0.4s;
+}
+
+.new-arrivals-page .mobile-drawer.active {
+    transform: translateX(0);
+    visibility: visible;
+}
+
+.new-arrivals-page .drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 25px;
+    border-bottom: 1px solid var(--arrival-border);
+}
+
+.new-arrivals-page .drawer-brand {
+    font-family: var(--arrival-serif);
+    font-size: 26px;
+}
+
+.new-arrivals-page .drawer-brand span {
+    color: var(--arrival-gold);
+}
+
+.new-arrivals-page .drawer-close {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--arrival-border);
+    background: transparent;
+    cursor: pointer;
+}
+
+.new-arrivals-page .drawer-eyebrow {
+    margin-block: 32px 15px;
+    color: var(--arrival-muted);
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+.new-arrivals-page .drawer-navigation {
+    display: flex;
+    flex-direction: column;
+}
+
+.new-arrivals-page .drawer-navigation > a {
+    display: grid;
+    grid-template-columns: 30px 1fr 20px;
+    align-items: center;
+    gap: 10px;
+    padding-block: 19px;
+    border-bottom: 1px solid var(--arrival-border);
+    font-family: var(--arrival-serif);
+    font-size: 21px;
+}
+
+.new-arrivals-page .drawer-navigation > a > span {
+    color: var(--arrival-gold);
+    font-family: var(--arrival-sans);
+    font-size: 10px;
+}
+
+.new-arrivals-page .drawer-navigation > a > i {
+    font-size: 12px;
+    transition: transform 0.3s ease;
+}
+
+.new-arrivals-page .drawer-navigation > a:hover > i {
+    transform: translateX(4px);
+}
+
+.new-arrivals-page .drawer-bottom {
+    margin-top: auto;
+    padding-top: 40px;
+}
+
+.new-arrivals-page .drawer-bottom > p {
+    color: var(--arrival-muted);
+    font-family: var(--arrival-serif);
+    font-size: 17px;
+    font-style: italic;
+}
+
+.new-arrivals-page .drawer-socials {
+    display: flex;
+    gap: 12px;
+}
+
+.new-arrivals-page .drawer-socials a {
+    display: grid;
+    place-items: center;
+    width: 37px;
+    height: 37px;
+    border: 1px solid var(--arrival-border);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.new-arrivals-page .drawer-socials a:hover {
+    background: var(--arrival-dark);
+    color: white;
+}
+
+
+/* =========================================================
+   SECTION 01 — HERO
+========================================================= */
+
+.new-arrivals-page .arrival-hero {
+    position: relative;
+    isolation: isolate;
+    min-height: 1050px;
+    padding: 76px 30px 32px;
+    overflow: hidden;
+    background:
+        radial-gradient(ellipse at 50% 54%, rgba(225, 211, 185, 0.32), transparent 48%),
+        linear-gradient(180deg, #f8f5ef 0%, #f3eee4 100%);
+}
+
+.new-arrivals-page .arrival-hero-background {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.new-arrivals-page .hero-orbit {
+    position: absolute;
+    left: 50%;
+    top: 53%;
+    border: 1px solid rgba(181, 150, 97, 0.17);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.new-arrivals-page .hero-orbit-one {
+    width: min(850px, 90vw);
+    height: min(850px, 90vw);
+}
+
+.new-arrivals-page .hero-orbit-two {
+    width: min(1100px, 110vw);
+    height: min(1100px, 110vw);
+    border-color: rgba(181, 150, 97, 0.09);
+}
+
+.new-arrivals-page .hero-glow {
+    position: absolute;
+    left: 50%;
+    top: 54%;
+    width: 550px;
+    height: 550px;
+    max-width: 90vw;
+    max-height: 90vw;
+    border-radius: 50%;
+    background: rgba(227, 209, 175, 0.22);
+    filter: blur(75px);
+    transform: translate(-50%, -50%);
+}
+
+.new-arrivals-page .arrival-hero-heading {
+    position: relative;
+    z-index: 5;
+    max-width: 690px;
+    margin-inline: auto;
+    text-align: center;
+}
+
+.new-arrivals-page .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: var(--arrival-gold);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2.8px;
+    line-height: 1.6;
+}
+
+.new-arrivals-page .eyebrow-line {
+    width: 25px;
+    height: 1px;
+    background: var(--arrival-gold);
+}
+
+.new-arrivals-page .arrival-hero-heading h1 {
+    margin: 19px 0 15px;
+    font-size: clamp(44px, 5vw, 76px);
+    line-height: 1.07;
+    letter-spacing: -2.7px;
+}
+
+.new-arrivals-page .arrival-hero-heading h1 em {
+    display: inline-block;
+}
+
+.new-arrivals-page .arrival-hero-heading > p {
+    max-width: 460px;
+    margin: 0 auto;
+    color: var(--arrival-muted);
+    font-size: 12px;
+    line-height: 1.9;
+}
+
+
+/* =========================================================
+   CURVED FIVE PRODUCT CAROUSEL
+========================================================= */
+
+.new-arrivals-page .arrival-carousel {
+    position: relative;
+    width: min(1120px, 100%);
+    height: 440px;
+    margin: 5px auto -4px;
+    perspective: 1200px;
+}
+
+.new-arrivals-page .arrival-slide {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 255px;
+    height: 330px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate(-50%, -44%) scale(0.7);
+    transition:
+        transform 0.75s cubic-bezier(.22, .61, .36, 1),
+        opacity 0.6s ease,
+        filter 0.6s ease,
+        visibility 0.6s ease;
+    filter: saturate(0.75);
+}
+
+.new-arrivals-page .arrival-slide.is-active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 5;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1.12);
+    filter: none;
+}
+
+/* Curved positions */
+
+.new-arrivals-page .arrival-slide.position-left-2 {
+    opacity: 0.68;
+    visibility: visible;
+    z-index: 1;
+    transform: translate(calc(-50% - 390px), calc(-50% + 76px)) rotate(-17deg) scale(0.72);
+}
+
+.new-arrivals-page .arrival-slide.position-left-1 {
+    opacity: 0.86;
+    visibility: visible;
+    z-index: 3;
+    transform: translate(calc(-50% - 220px), calc(-50% + 28px)) rotate(-9deg) scale(0.88);
+}
+
+.new-arrivals-page .arrival-slide.position-right-1 {
+    opacity: 0.86;
+    visibility: visible;
+    z-index: 3;
+    transform: translate(calc(-50% + 220px), calc(-50% + 28px)) rotate(9deg) scale(0.88);
+}
+
+.new-arrivals-page .arrival-slide.position-right-2 {
+    opacity: 0.68;
+    visibility: visible;
+    z-index: 1;
+    transform: translate(calc(-50% + 390px), calc(-50% + 76px)) rotate(17deg) scale(0.72);
+}
+
+.new-arrivals-page .arrival-slide.is-active .arrival-product-visual {
+    box-shadow: 0 35px 75px rgba(77, 57, 34, 0.14);
+}
+
+.new-arrivals-page .arrival-product-visual {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border: 1px solid rgba(181, 150, 97, 0.19);
+    background: linear-gradient(145deg, #f0e7d8, #e6d8c3);
+    transition: box-shadow 0.6s ease;
+}
+
+.new-arrivals-page .arrival-slide:nth-child(2) .arrival-product-visual {
+    background: linear-gradient(145deg, #e7ded4, #d4c3b2);
+}
+
+.new-arrivals-page .arrival-slide:nth-child(3) .arrival-product-visual {
+    background: linear-gradient(145deg, #f0e2d6, #dbc5b1);
+}
+
+.new-arrivals-page .arrival-slide:nth-child(4) .arrival-product-visual {
+    background: linear-gradient(145deg, #e7dfd0, #c9b89a);
+}
+
+.new-arrivals-page .arrival-slide:nth-child(5) .arrival-product-visual {
+    background: linear-gradient(145deg, #ece6dc, #d9cec0);
+}
+
+.new-arrivals-page .arrival-product-halo {
+    position: absolute;
+    left: 50%;
+    top: 49%;
+    width: 78%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: rgba(255, 250, 240, 0.5);
+    transform: translate(-50%, -50%);
+}
+
+.new-arrivals-page .arrival-product-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 22px;
+    z-index: 2;
+    transition: transform 0.8s cubic-bezier(.22, .61, .36, 1);
+}
+
+.new-arrivals-page .arrival-slide.is-active .arrival-product-image {
+    animation: arrivalImageReveal 0.8s ease both;
+}
+
+@keyframes arrivalImageReveal {
+    from {
+        opacity: 0.6;
+        transform: translateY(18px) scale(0.94);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.new-arrivals-page .product-index {
+    position: absolute;
+    z-index: 4;
+    top: 17px;
+    left: 16px;
+    color: rgba(41, 37, 31, 0.7);
+    font-size: 9px;
+    letter-spacing: 1.5px;
+}
+
+.new-arrivals-page .product-floating-label {
+    position: absolute;
+    z-index: 4;
+    right: 12px;
+    bottom: 15px;
+    left: 12px;
+    color: rgba(41, 37, 31, 0.68);
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+
+/* =========================================================
+   HERO ARROWS
+========================================================= */
+
+.new-arrivals-page .arrival-arrow {
+    position: absolute;
+    top: 48%;
+    z-index: 10;
+    display: grid;
+    place-items: center;
+    width: 47px;
+    height: 47px;
+    border: 1px solid rgba(181, 150, 97, 0.35);
+    border-radius: 50%;
+    background: rgba(255, 253, 249, 0.8);
+    cursor: pointer;
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease;
+}
+
+.new-arrivals-page .arrival-prev {
+    left: 10px;
+}
+
+.new-arrivals-page .arrival-next {
+    right: 10px;
+}
+
+.new-arrivals-page .arrival-arrow:hover {
+    background: var(--arrival-dark);
+    color: white;
+    transform: scale(1.06);
+}
+
+
+/* =========================================================
+   DYNAMIC HERO CONTENT
+========================================================= */
+
+.new-arrivals-page .arrival-hero-content {
+    position: relative;
+    z-index: 6;
+    width: min(540px, 100%);
+    margin: -7px auto 0;
+    text-align: center;
+}
+
+.new-arrivals-page .arrival-content-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.new-arrivals-page .arrival-category {
+    color: var(--arrival-gold);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2.2px;
+}
+
+.new-arrivals-page .arrival-badge {
+    padding: 5px 10px;
+    background: var(--arrival-dark);
+    color: white;
+    font-size: 8px;
+    letter-spacing: 1.4px;
+}
+
+.new-arrivals-page .arrival-product-title {
+    margin: 12px 0 10px;
+    font-family: var(--arrival-serif);
+    font-size: clamp(28px, 3vw, 39px);
+    line-height: 1.25;
+    letter-spacing: -0.6px;
+}
+
+.new-arrivals-page .arrival-product-description {
+    max-width: 440px;
+    margin: 0 auto;
+    color: var(--arrival-muted);
+    font-size: 11px;
+    line-height: 1.9;
+}
+
+.new-arrivals-page .arrival-price-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 17px;
+}
+
+.new-arrivals-page .arrival-price {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.new-arrivals-page .arrival-old-price {
+    color: #a29a8d;
+    font-size: 12px;
+    text-decoration: line-through;
+}
+
+.new-arrivals-page .arrival-hero-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 22px;
+}
+
+.new-arrivals-page .button-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 23px;
+    min-height: 49px;
+    padding: 0 22px;
+    border: 1px solid var(--arrival-dark);
+    background: var(--arrival-dark);
+    color: white;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease,
+        transform 0.3s ease;
+}
+
+.new-arrivals-page .button-primary i {
+    transition: transform 0.3s ease;
+}
+
+.new-arrivals-page .button-primary:hover {
+    background: var(--arrival-gold);
+    border-color: var(--arrival-gold);
+    color: white;
+}
+
+.new-arrivals-page .button-primary:hover i {
+    transform: translateX(4px);
+}
+
+.new-arrivals-page .arrival-wishlist {
+    display: grid;
+    place-items: center;
+    width: 49px;
+    height: 49px;
+    border: 1px solid var(--arrival-border);
+    background: transparent;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.new-arrivals-page .arrival-wishlist:hover,
+.new-arrivals-page .arrival-wishlist.is-favourite {
+    border-color: #a74f48;
+    color: #a74f48;
+}
+
+
+/* =========================================================
+   HERO PAGINATION
+========================================================= */
+
+.new-arrivals-page .arrival-carousel-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 27px;
+    margin-top: 27px;
+}
+
+.new-arrivals-page .arrival-pagination {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.new-arrivals-page .arrival-dot {
+    display: grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.new-arrivals-page .arrival-dot span {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #c9c0b2;
+    transition: all 0.3s ease;
+}
+
+.new-arrivals-page .arrival-dot.active span {
+    width: 20px;
+    height: 5px;
+    border-radius: 10px;
+    background: var(--arrival-gold);
+}
+
+.new-arrivals-page .arrival-slide-counter {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+.new-arrivals-page #arrivalCurrentNumber {
+    color: var(--arrival-gold);
+    font-weight: 700;
+}
+
+.new-arrivals-page .counter-divider {
+    width: 20px;
+    height: 1px;
+    background: var(--arrival-border);
+}
+
+.new-arrivals-page .arrival-progress-track {
+    width: 160px;
+    height: 2px;
+    margin: 20px auto 0;
+    overflow: hidden;
+    background: rgba(181, 150, 97, 0.18);
+}
+
+.new-arrivals-page .arrival-progress-track span {
+    display: block;
+    width: 0;
+    height: 100%;
+    background: var(--arrival-gold);
+}
+
+.new-arrivals-page .arrival-progress-track span.running {
+    animation: arrivalProgress 5.5s linear forwards;
+}
+
+@keyframes arrivalProgress {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+.new-arrivals-page .arrival-hero-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    max-width: 1420px;
+    margin: 43px auto 0;
+    padding-top: 22px;
+    border-top: 1px solid rgba(181, 150, 97, 0.18);
+    color: #958a7a;
+    font-size: 8px;
+    letter-spacing: 1.8px;
+}
+
+.new-arrivals-page .hero-footer-center {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.new-arrivals-page .hero-footer-center i {
+    color: var(--arrival-gold);
+}
+
+
+/* =========================================================
+   SECTION 02 — LUXURY STRIP
+========================================================= */
+
+.new-arrivals-page .luxury-strip {
+    padding-block: 34px;
+    background: var(--arrival-white);
+    border-block: 1px solid var(--arrival-border);
+}
+
+.new-arrivals-page .luxury-strip-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.new-arrivals-page .luxury-strip-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    flex: 1;
+}
+
+.new-arrivals-page .luxury-strip-icon {
+    display: grid;
+    place-items: center;
+    width: 43px;
+    height: 43px;
+    flex-shrink: 0;
+    border: 1px solid var(--arrival-border);
+    border-radius: 50%;
+    color: var(--arrival-gold);
+    font-size: 15px;
+}
+
+.new-arrivals-page .luxury-strip-item h3 {
+    margin-bottom: 3px;
+    font-family: var(--arrival-serif);
+    font-size: 15px;
+}
+
+.new-arrivals-page .luxury-strip-item p {
+    margin-bottom: 0;
+    color: var(--arrival-muted);
+    font-size: 10px;
+}
+
+.new-arrivals-page .luxury-strip-divider {
+    width: 1px;
+    height: 37px;
+    background: var(--arrival-border);
+}
+
+
+/* =========================================================
+   SECTION HEADINGS
+========================================================= */
+
+.new-arrivals-page .section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 50px;
+    margin-bottom: 42px;
+}
+
+.new-arrivals-page .section-heading-left {
+    max-width: 650px;
+}
+
+.new-arrivals-page .section-heading-left h2,
+.new-arrivals-page .trending-top h2 {
+    margin: 13px 0 0;
+    font-size: clamp(35px, 4.3vw, 58px);
+    line-height: 1.15;
+    letter-spacing: -1.8px;
+}
+
+.new-arrivals-page .section-heading-right {
+    max-width: 390px;
+}
+
+.new-arrivals-page .section-heading-right p {
+    margin-bottom: 17px;
+    color: var(--arrival-muted);
+    font-size: 11px;
+    line-height: 1.9;
+}
+
+.new-arrivals-page .text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 13px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--arrival-gold);
+    font-size: 10px;
+    transition: color 0.3s ease;
+}
+
+.new-arrivals-page .text-link i {
+    color: var(--arrival-gold);
+    transition: transform 0.3s ease;
+}
+
+.new-arrivals-page .text-link:hover {
+    color: var(--arrival-gold);
+}
+
+.new-arrivals-page .text-link:hover i {
+    transform: translateX(5px);
+}
+
+
+/* =========================================================
+   SECTION 03 — PRODUCT FILTERS
+========================================================= */
+
+.new-arrivals-page .new-collection {
+    background: var(--arrival-bg);
+}
+
+.new-arrivals-page .product-filters {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+}
+
+.new-arrivals-page .product-filter {
+    padding: 10px 19px;
+    border: 1px solid var(--arrival-border);
+    background: transparent;
+    color: var(--arrival-muted);
+    font-size: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.new-arrivals-page .product-filter:hover,
+.new-arrivals-page .product-filter.active {
+    border-color: var(--arrival-dark);
+    background: var(--arrival-dark);
+    color: white;
+}
+
+
+/* =========================================================
+   PRODUCT GRID
+========================================================= */
+
+.new-arrivals-page .product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 44px 22px;
+}
+
+.new-arrivals-page .product-card {
+    min-width: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.new-arrivals-page .product-card.is-hidden {
+    display: none;
+}
+
+.new-arrivals-page .product-image-link {
+    display: block;
+}
+
+.new-arrivals-page .product-image-wrap {
+    position: relative;
+    aspect-ratio: 0.79;
+    overflow: hidden;
+    background: #eee7dc;
+}
+
+.new-arrivals-page .product-card:nth-child(4n + 2) .product-image-wrap {
+    background: #e8e0d5;
+}
+
+.new-arrivals-page .product-card:nth-child(4n + 3) .product-image-wrap {
+    background: #f0e6dc;
+}
+
+.new-arrivals-page .product-card:nth-child(4n + 4) .product-image-wrap {
+    background: #e7dfd0;
+}
+
+.new-arrivals-page .product-image-wrap > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(.22, .61, .36, 1);
+}
+
+.new-arrivals-page .product-card:hover .product-image-wrap > img {
+    transform: scale(1.07);
+}
+
+.new-arrivals-page .product-label {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    z-index: 2;
+    padding: 6px 9px;
+    background: var(--arrival-gold);
+    color: white;
+    font-size: 8px;
+    letter-spacing: 1px;
+}
+
+.new-arrivals-page .product-label-dark {
+    background: var(--arrival-dark);
+}
+
+.new-arrivals-page .product-image-overlay {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 42px;
+    background: rgba(255, 253, 249, 0.94);
+    font-size: 10px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.new-arrivals-page .product-image-overlay i {
+    color: var(--arrival-gold);
+}
+
+.new-arrivals-page .product-card:hover .product-image-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.new-arrivals-page .product-card-info {
+    padding-top: 17px;
+}
+
+.new-arrivals-page .product-card-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.new-arrivals-page .product-category {
+    display: block;
+    margin-bottom: 7px;
+    color: var(--arrival-gold);
+    font-size: 8px;
+    letter-spacing: 1.7px;
+}
+
+.new-arrivals-page .product-card-heading h3,
+.new-arrivals-page .trending-info h3 {
+    margin: 0;
+    font-family: var(--arrival-serif);
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.new-arrivals-page .product-wishlist {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    border: 1px solid var(--arrival-border);
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.new-arrivals-page .product-wishlist:hover,
+.new-arrivals-page .product-wishlist.is-favourite {
+    border-color: #a74f48;
+    color: #a74f48;
+}
+
+.new-arrivals-page .product-card-bottom {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-top: 11px;
+}
+
+.new-arrivals-page .product-price {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.new-arrivals-page .product-old-price {
+    color: #a39b8f;
+    font-size: 10px;
+    text-decoration: line-through;
+}
+
+.new-arrivals-page .collection-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    margin-top: 55px;
+    padding-top: 25px;
+    border-top: 1px solid var(--arrival-border);
+}
+
+.new-arrivals-page .collection-bottom p {
+    margin: 0;
+    color: var(--arrival-muted);
+    font-family: var(--arrival-serif);
+    font-size: 17px;
+    font-style: italic;
+}
+
+.new-arrivals-page .button-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+    padding: 15px 20px;
+    border: 1px solid var(--arrival-dark);
+    font-size: 10px;
+    transition: all 0.3s ease;
+}
+
+.new-arrivals-page .button-outline i {
+    color: var(--arrival-gold);
+    transition: transform 0.3s ease;
+}
+
+.new-arrivals-page .button-outline:hover {
+    background: var(--arrival-dark);
+    color: white;
+}
+
+.new-arrivals-page .button-outline:hover i {
+    transform: translateX(4px);
+}
+
+
+/* =========================================================
+   SECTION 04 — CATEGORIES
+========================================================= */
+
+.new-arrivals-page .category-section {
+    background: #f0ebe2;
+}
+
+.new-arrivals-page .category-grid {
+    display: grid;
+    grid-template-columns: 1.18fr 1fr 1fr;
+    gap: 22px;
+}
+
+.new-arrivals-page .category-card {
+    display: block;
+    min-width: 0;
+}
+
+.new-arrivals-page .category-image {
+    position: relative;
+    aspect-ratio: 0.9;
+    overflow: hidden;
+    background: #e2d7c8;
+}
+
+.new-arrivals-page .category-card-large .category-image {
+    aspect-ratio: 0.78;
+}
+
+.new-arrivals-page .category-image > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(.22, .61, .36, 1);
+}
+
+.new-arrivals-page .category-card:hover .category-image > img {
+    transform: scale(1.06);
+}
+
+.new-arrivals-page .category-image-shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(30, 25, 20, 0.03) 35%,
+        rgba(30, 25, 20, 0.32) 100%
+    );
+}
+
+.new-arrivals-page .category-number {
+    position: absolute;
+    top: 19px;
+    left: 19px;
+    color: white;
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+.new-arrivals-page .category-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding-top: 19px;
+}
+
+.new-arrivals-page .category-content > div > span {
+    color: var(--arrival-gold);
+    font-size: 8px;
+    letter-spacing: 1.6px;
+}
+
+.new-arrivals-page .category-content h3 {
+    margin: 6px 0 0;
+    font-family: var(--arrival-serif);
+    font-size: clamp(19px, 2vw, 25px);
+}
+
+.new-arrivals-page .category-arrow {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border: 1px solid rgba(41, 37, 31, 0.2);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.new-arrivals-page .category-card:hover .category-arrow {
+    background: var(--arrival-dark);
+    color: white;
+    transform: rotate(45deg);
+}
+
+
+/* =========================================================
+   SECTION 05 — EDITOR'S PICK
+========================================================= */
+
+.new-arrivals-page .editors-section {
+    background: var(--arrival-white);
+}
+
+.new-arrivals-page .editors-container {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    align-items: center;
+    gap: clamp(50px, 8vw, 120px);
+}
+
+.new-arrivals-page .editors-visual {
+    position: relative;
+    min-height: 610px;
+}
+
+.new-arrivals-page .editors-image-main {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 78%;
+    height: 535px;
+    overflow: hidden;
+    background: #e9dfd0;
+}
+
+.new-arrivals-page .editors-image-main img,
+.new-arrivals-page .editors-image-small img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.new-arrivals-page .editors-image-main img {
+    transition: transform 0.8s ease;
+}
+
+.new-arrivals-page .editors-visual:hover .editors-image-main img {
+    transform: scale(1.04);
+}
+
+.new-arrivals-page .editors-image-small {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 43%;
+    height: 255px;
+    padding: 8px;
+    background: var(--arrival-white);
+    overflow: hidden;
+}
+
+.new-arrivals-page .editors-stamp {
+    position: absolute;
+    top: 36px;
+    right: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    border: 1px solid var(--arrival-gold);
+    border-radius: 50%;
+    background: var(--arrival-bg);
+    color: var(--arrival-gold);
+}
+
+.new-arrivals-page .editors-stamp span {
+    font-size: 8px;
+    letter-spacing: 2px;
+}
+
+.new-arrivals-page .editors-stamp strong {
+    font-family: var(--arrival-serif);
+    font-size: 35px;
+    font-weight: 400;
+    line-height: 1.1;
+}
+
+.new-arrivals-page .editors-content {
+    padding-block: 20px;
+}
+
+.new-arrivals-page .editors-season {
+    display: block;
+    margin-top: 25px;
+    color: var(--arrival-muted);
+    font-size: 9px;
+    letter-spacing: 1.8px;
+}
+
+.new-arrivals-page .editors-content h2 {
+    margin: 15px 0 20px;
+    font-size: clamp(36px, 4.3vw, 56px);
+    line-height: 1.15;
+    letter-spacing: -1.8px;
+}
+
+.new-arrivals-page .editors-lead {
+    margin-bottom: 10px;
+    font-family: var(--arrival-serif);
+    font-size: 19px;
+    font-style: italic;
+}
+
+.new-arrivals-page .editors-description {
+    margin-bottom: 30px;
+    color: var(--arrival-muted);
+    font-size: 11px;
+    line-height: 2;
+}
+
+.new-arrivals-page .editors-details {
+    margin-bottom: 30px;
+}
+
+.new-arrivals-page .editors-detail-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 19px;
+    padding-block: 16px;
+    border-top: 1px solid var(--arrival-border);
+}
+
+.new-arrivals-page .editors-detail-number {
+    padding-top: 4px;
+    color: var(--arrival-gold);
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+.new-arrivals-page .editors-detail-item h3 {
+    margin-bottom: 4px;
+    font-family: var(--arrival-serif);
+    font-size: 16px;
+}
+
+.new-arrivals-page .editors-detail-item p {
+    margin-bottom: 0;
+    color: var(--arrival-muted);
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   SECTION 06 — TRENDING
+========================================================= */
+
+.new-arrivals-page .trending-section {
+    overflow: hidden;
+    background: #f1ece3;
+}
+
+.new-arrivals-page .trending-top {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 42px;
+}
+
+.new-arrivals-page .trending-top > div:first-child {
+    max-width: 620px;
+}
+
+.new-arrivals-page .trending-top h2 {
+    margin-top: 12px;
+}
+
+.new-arrivals-page .trending-top p {
+    max-width: 490px;
+    margin: 17px 0 0;
+    color: var(--arrival-muted);
+    font-size: 11px;
+    line-height: 1.9;
+}
+
+.new-arrivals-page .trending-navigation {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.new-arrivals-page .trending-arrow {
+    display: grid;
+    place-items: center;
+    width: 45px;
+    height: 45px;
+    border: 1px solid #d8cebf;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.new-arrivals-page .trending-arrow:hover {
+    background: var(--arrival-dark);
+    color: white;
+}
+
+.new-arrivals-page .trending-track {
+    display: grid;
+    grid-auto-columns: calc((100% - 66px) / 4);
+    grid-auto-flow: column;
+    gap: 22px;
+    overflow-x: auto;
+    padding-bottom: 20px;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--arrival-gold) transparent;
+}
+
+.new-arrivals-page .trending-track::-webkit-scrollbar {
+    height: 3px;
+}
+
+.new-arrivals-page .trending-track::-webkit-scrollbar-track {
+    background: #e3dbce;
+}
+
+.new-arrivals-page .trending-track::-webkit-scrollbar-thumb {
+    background: var(--arrival-gold);
+}
+
+.new-arrivals-page .trending-card {
+    min-width: 0;
+    scroll-snap-align: start;
+}
+
+.new-arrivals-page .trending-image-link {
+    display: block;
+}
+
+.new-arrivals-page .trending-image {
+    position: relative;
+    aspect-ratio: 0.84;
+    overflow: hidden;
+    background: #e5d9c8;
+}
+
+.new-arrivals-page .trending-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s ease;
+}
+
+.new-arrivals-page .trending-card:hover .trending-image img {
+    transform: scale(1.06);
+}
+
+.new-arrivals-page .trending-number {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    color: white;
+    font-size: 10px;
+}
+
+.new-arrivals-page .trending-tag {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    padding: 7px 10px;
+    background: rgba(255, 253, 249, 0.93);
+    font-size: 8px;
+    letter-spacing: 1px;
+}
+
+.new-arrivals-page .trending-info {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 10px;
+    padding-top: 17px;
+}
+
+.new-arrivals-page .trending-info h3 {
+    font-size: 15px;
+}
+
+.new-arrivals-page .trending-info > .product-price {
+    white-space: nowrap;
+}
+
+.new-arrivals-page .trending-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 28px;
+    padding-top: 23px;
+    border-top: 1px solid #ddd3c5;
+}
+
+.new-arrivals-page .trending-footer > span {
+    color: var(--arrival-muted);
+    font-size: 8px;
+    letter-spacing: 1.7px;
+}
+
+
+/* =========================================================
+   SECTION 07 — NEWSLETTER
+========================================================= */
+
+.new-arrivals-page .exclusive-section {
+    position: relative;
+    isolation: isolate;
+    min-height: 600px;
+    display: grid;
+    place-items: center;
+    padding: 100px 25px;
+    overflow: hidden;
+    background: #44382d;
+    color: white;
+    text-align: center;
+}
+
+.new-arrivals-page .exclusive-background {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+}
+
+.new-arrivals-page .exclusive-background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.new-arrivals-page .exclusive-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(39, 32, 25, 0.76);
+}
+
+.new-arrivals-page .exclusive-content {
+    width: min(680px, 100%);
+    margin-inline: auto;
+}
+
+.new-arrivals-page .exclusive-content .eyebrow {
+    color: #ddc59c;
+}
+
+.new-arrivals-page .exclusive-content .eyebrow-line {
+    background: #ddc59c;
+}
+
+.new-arrivals-page .exclusive-content h2 {
+    margin: 24px 0 19px;
+    font-size: clamp(39px, 5.3vw, 69px);
+    line-height: 1.12;
+    letter-spacing: -1.7px;
+}
+
+.new-arrivals-page .exclusive-content h2 em {
+    color: #ddc59c;
+}
+
+.new-arrivals-page .exclusive-content > p {
+    max-width: 480px;
+    margin: 0 auto;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 11px;
+    line-height: 2;
+}
+
+.new-arrivals-page .newsletter-form {
+    display: flex;
+    align-items: stretch;
+    width: min(480px, 100%);
+    margin: 34px auto 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.new-arrivals-page .newsletter-form input {
+    width: 100%;
+    min-width: 0;
+    padding: 15px 0;
+    border: 0;
+    outline: none;
+    background: transparent;
+    color: white;
+    font-size: 11px;
+}
+
+.new-arrivals-page .newsletter-form input::placeholder {
+    color: rgba(255, 255, 255, 0.63);
+}
+
+.new-arrivals-page .newsletter-form button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    flex-shrink: 0;
+    padding: 0 12px;
+    border: 0;
+    background: transparent;
+    color: #ddc59c;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.new-arrivals-page .newsletter-form button i {
+    transition: transform 0.3s ease;
+}
+
+.new-arrivals-page .newsletter-form button:hover i {
+    transform: translateX(5px);
+}
+
+.new-arrivals-page .exclusive-content .newsletter-note {
+    min-height: 22px;
+    margin-top: 14px;
+    font-size: 9px;
+}
+
+.new-arrivals-page .exclusive-signature {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 35px;
+    color: #ddc59c;
+    font-family: var(--arrival-serif);
+    font-size: 15px;
+    font-style: italic;
+}
+
+.new-arrivals-page .exclusive-signature-line {
+    width: 35px;
+    height: 1px;
+    background: #ddc59c;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.new-arrivals-page .site-footer {
+    padding-top: 80px;
+    background: #29251f;
+    color: #f8f5ef;
+}
+
+.new-arrivals-page .footer-top {
+    display: grid;
+    grid-template-columns: 1.5fr 0.8fr 1fr 1.1fr;
+    gap: 55px;
+    padding-bottom: 65px;
+}
+
+.new-arrivals-page .footer-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.new-arrivals-page .footer-logo-mark {
+    color: var(--arrival-gold-light);
+    font-family: var(--arrival-serif);
+    font-size: 42px;
+    line-height: 1;
+}
+
+.new-arrivals-page .footer-logo-name {
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: 4px;
+}
+
+.new-arrivals-page .footer-brand-description {
+    max-width: 290px;
+    margin: 23px 0;
+    color: #b5aa9a;
+    font-size: 10px;
+    line-height: 2;
+}
+
+.new-arrivals-page .footer-socials {
+    display: flex;
+    gap: 10px;
+}
+
+.new-arrivals-page .footer-socials a {
+    display: grid;
+    place-items: center;
+    width: 37px;
+    height: 37px;
+    border: 1px solid #51483d;
+    color: #d7c9b3;
+    transition: all 0.3s ease;
+}
+
+.new-arrivals-page .footer-socials a:hover {
+    background: var(--arrival-gold);
+    border-color: var(--arrival-gold);
+    color: white;
+}
+
+.new-arrivals-page .footer-links-column h3,
+.new-arrivals-page .footer-contact-column h3 {
+    margin-bottom: 24px;
+    font-family: var(--arrival-serif);
+    font-size: 19px;
+}
+
+.new-arrivals-page .footer-links-column nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 13px;
+}
+
+.new-arrivals-page .footer-links-column nav a {
+    color: #b5aa9a;
+    font-size: 10px;
+    transition: color 0.3s ease;
+}
+
+.new-arrivals-page .footer-links-column nav a:hover {
+    color: var(--arrival-gold-light);
+}
+
+.new-arrivals-page .footer-contact-column > p {
+    color: #b5aa9a;
+    font-size: 10px;
+    line-height: 2;
+}
+
+.new-arrivals-page .footer-contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 9px;
+    color: var(--arrival-gold-light);
+    font-size: 10px;
+}
+
+.new-arrivals-page .footer-contact-link i {
+    transition: transform 0.3s ease;
+}
+
+.new-arrivals-page .footer-contact-link:hover i {
+    transform: translateX(5px);
+}
+
+.new-arrivals-page .footer-contact-caption {
+    display: block;
+    margin-top: 32px;
+    color: #8e8272;
+    font-size: 8px;
+    letter-spacing: 1.6px;
+}
+
+.new-arrivals-page .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    min-height: 75px;
+    border-top: 1px solid #484036;
+}
+
+.new-arrivals-page .footer-bottom > p {
+    margin: 0;
+    color: #a79b8a;
+    font-size: 8px;
+    letter-spacing: 1px;
+}
+
+.new-arrivals-page .footer-bottom-center {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: #b5aa9a;
+    font-size: 8px;
+    letter-spacing: 1.5px;
+}
+
+.new-arrivals-page .footer-bottom-center span {
+    color: var(--arrival-gold-light);
+    font-family: var(--arrival-serif);
+    font-size: 21px;
+}
+
+
+/* =========================================================
+   SEARCH MODAL
+========================================================= */
+
+.new-arrivals-page .search-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1500;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.new-arrivals-page .search-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.new-arrivals-page .search-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(30, 26, 21, 0.67);
+}
+
+.new-arrivals-page .search-modal-content {
+    position: relative;
+    width: min(620px, 100%);
+    padding: 65px 55px;
+    background: var(--arrival-bg);
+    transform: translateY(20px);
+    transition: transform 0.4s ease;
+}
+
+.new-arrivals-page .search-modal.active .search-modal-content {
+    transform: translateY(0);
+}
+
+.new-arrivals-page .search-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--arrival-border);
+    background: transparent;
+    cursor: pointer;
+}
+
+.new-arrivals-page .search-modal-content h2 {
+    margin: 18px 0 30px;
+    font-size: clamp(29px, 4vw, 43px);
+    line-height: 1.2;
+}
+
+.new-arrivals-page .search-form {
+    display: flex;
+    border-bottom: 1px solid var(--arrival-dark);
+}
+
+.new-arrivals-page .search-form input {
+    width: 100%;
+    min-width: 0;
+    padding: 17px 0;
+    border: 0;
+    outline: none;
+    background: transparent;
+    font-size: 12px;
+}
+
+.new-arrivals-page .search-form button {
+    width: 45px;
+    flex-shrink: 0;
+    border: 0;
+    background: transparent;
+    color: var(--arrival-gold);
+    cursor: pointer;
+}
+
+.new-arrivals-page .search-suggestions-label {
+    margin: 27px 0 12px;
+    color: var(--arrival-muted);
+    font-size: 8px;
+    letter-spacing: 1.7px;
+}
+
+.new-arrivals-page .search-suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.new-arrivals-page .search-suggestions a {
+    padding: 8px 12px;
+    border: 1px solid var(--arrival-border);
+    font-size: 10px;
+    transition: all 0.3s ease;
+}
+
+.new-arrivals-page .search-suggestions a:hover {
+    background: var(--arrival-dark);
+    color: white;
+}
+
+
+
+/* =========================================================
+   SCROLL TO TOP
+========================================================= */
+
+.new-arrivals-page .scroll-top {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    z-index: 900;
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border: 1px solid rgba(181, 150, 97, 0.45);
+    border-radius: 50%;
+    background: var(--arrival-dark);
+    color: white;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(15px);
+    transition: all 0.35s ease;
+}
+
+.new-arrivals-page .scroll-top.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.new-arrivals-page .scroll-top:hover {
+    background: var(--arrival-gold);
+    border-color: var(--arrival-gold);
+    transform: translateY(-5px);
+}
+
+
+/* =========================================================
+   REVEAL ANIMATION
+========================================================= */
+
+.new-arrivals-page .reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(25px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.new-arrivals-page .reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    .new-arrivals-page *,
+    .new-arrivals-page *::before,
+    .new-arrivals-page *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}
