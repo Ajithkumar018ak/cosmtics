@@ -2217,7 +2217,7 @@ body {
     color: var(--color-text);
     background: var(--color-cream);
     line-height: 1.65;
-    overflow-x: hidden;
+    overflow-x: clip;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -7939,4 +7939,415 @@ ul {
         width: 135px;
         height: 50px;
     }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================================
+   ÉLORA — HEADER NAVIGATION LAYOUT
+========================================== */
+
+.site-header .nav-container {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 18px 5%;
+    gap: 25px;
+}
+
+/* DESKTOP NAVIGATION — CENTER */
+
+.main-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    white-space: nowrap;
+}
+
+.main-navigation .nav-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 0;
+    color: #484044;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    transition: color 0.3s ease;
+}
+
+/* NAVIGATION HOVER */
+
+.main-navigation .nav-link:hover,
+.main-navigation .nav-link.active {
+    color: #d85b85;
+}
+
+/* UNDERLINE ANIMATION */
+
+.main-navigation .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 3px;
+    width: 100%;
+    height: 1.5px;
+    background: #d85b85;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.main-navigation .nav-link:hover::after,
+.main-navigation .nav-link.active::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+
+/* ==========================================
+   LOGIN BUTTON — LUXURY PINK
+========================================== */
+
+.login-button {
+    justify-self: end;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-width: 112px;
+    min-height: 44px;
+    padding: 11px 20px;
+
+    border: 1px solid #e5a1b8;
+    border-radius: 50px;
+
+    background: #fff7fa;
+    color: #b94770;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+
+    cursor: pointer;
+    white-space: nowrap;
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+/* LOGIN ICON */
+
+.login-button i {
+    font-size: 15px;
+    transition: transform 0.3s ease;
+}
+
+/* LOGIN HOVER */
+
+.login-button:hover {
+    background: #d85b85;
+    color: #ffffff;
+    border-color: #d85b85;
+    box-shadow: 0 7px 20px rgba(216, 91, 133, 0.2);
+    transform: translateY(-2px);
+}
+
+.login-button:hover i {
+    transform: scale(1.1);
+}
+
+/* KEYBOARD ACCESSIBILITY */
+
+.login-button:focus-visible,
+.main-navigation .nav-link:focus-visible {
+    outline: 2px solid #d85b85;
+    outline-offset: 5px;
+}
+
+
+/* ==========================================
+   TABLET RESPONSIVE
+========================================== */
+
+@media (max-width: 1100px) {
+    .site-header .nav-container {
+        padding: 16px 3%;
+        gap: 18px;
+    }
+
+    .main-navigation {
+        gap: 20px;
+    }
+
+    .main-navigation .nav-link {
+        font-size: 12px;
+    }
+
+    .login-button {
+        min-width: 100px;
+        padding: 10px 15px;
+    }
+}
+
+
+/* ==========================================
+   MOBILE RESPONSIVE
+========================================== */
+
+@media (max-width: 768px) {
+    .site-header .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 5%;
+    }
+
+    /* Desktop links hidden on mobile.
+       Mobile drawer should be controlled
+       by your existing hamburger-menu CSS. */
+
+    .main-navigation {
+        display: none;
+    }
+
+    .login-button {
+        justify-self: auto;
+        min-width: auto;
+        min-height: 40px;
+        gap: 7px;
+        padding: 9px 14px;
+        font-size: 12px;
+    }
+
+    .login-button i {
+        font-size: 14px;
+    }
+}
+
+
+/* SMALL MOBILE */
+
+@media (max-width: 360px) {
+    .site-header .nav-container {
+        padding: 12px 4%;
+        gap: 8px;
+    }
+
+    .login-button {
+        padding: 8px 11px;
+        gap: 6px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* =====================================
+   ÉLORA — HEADER CENTER ALIGNMENT
+===================================== */
+
+.site-header .nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 35px;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 20px 30px;
+}
+
+/* LOGO */
+
+.brand-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* NAVIGATION — CENTER */
+
+.main-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    flex-shrink: 0;
+}
+
+.main-navigation .nav-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 0;
+    color: #484044;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: color 0.3s ease;
+}
+
+.main-navigation .nav-link:hover,
+.main-navigation .nav-link.active {
+    color: #d85b85;
+}
+
+/* NAVIGATION UNDERLINE */
+
+.main-navigation .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 3px;
+    width: 100%;
+    height: 2px;
+    background: #d85b85;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.main-navigation .nav-link:hover::after,
+.main-navigation .nav-link.active::after {
+    transform: scaleX(1);
+}
+
+/* LOGIN BUTTON */
+
+.login-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 22px;
+    min-height: 42px;
+
+    border: 1px solid #e5a1b8;
+    border-radius: 50px;
+
+    background: #fff7fa;
+    color: #b94770;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+
+    white-space: nowrap;
+    cursor: pointer;
+    flex-shrink: 0;
+
+    transition: all 0.3s ease;
+}
+
+.login-button:hover {
+    background: #d85b85;
+    color: #ffffff;
+    border-color: #d85b85;
+    box-shadow: 0 6px 18px rgba(216, 91, 133, 0.2);
+}
+
+.login-button i {
+    font-size: 15px;
+}
+
+/* TABLET */
+
+@media (max-width: 1100px) {
+    .site-header .nav-container {
+        gap: 22px;
+        padding: 18px 20px;
+    }
+
+    .main-navigation {
+        gap: 18px;
+    }
+
+    .main-navigation .nav-link {
+        font-size: 12px;
+    }
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+    .site-header .nav-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: nowrap;
+        gap: 12px;
+        padding: 14px 16px;
+    }
+
+    .main-navigation {
+        display: none;
+    }
+
+    .login-button {
+        padding: 9px 14px;
+        min-height: 38px;
+        font-size: 12px;
+    }
+}
+
+
+
+
+/* =========================================
+   ÉLORA — STICKY HEADER
+========================================= */
+
+.site-header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    /* Background set by main rule; keeping transition */
+    transition:
+        box-shadow 0.3s ease,
+        background-color 0.3s ease;
+}
+
+/* Optional: Subtle shadow while scrolling */
+
+.site-header.scrolled {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Prevent header content from overflowing */
+
+.header-container {
+    width: 100%;
+    position: relative;
 }

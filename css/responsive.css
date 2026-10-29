@@ -24,7 +24,7 @@ html {
 
 body {
     max-width: 100%;
-    overflow-x: hidden;
+    overflow-x: clip;
     position: relative;
     margin: 0;
     padding: 0;
@@ -1157,3 +1157,27 @@ p, span, a, label, li, blockquote {
     }
 }
 
+
+
+
+/* =========================================================
+   STICKY HEADER ENFORCEMENT
+   Overrides any page-specific CSS that sets position: relative
+   on .site-header. Applied last since responsive.css is loaded last.
+========================================================= */
+
+html body .site-header {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 9999 !important;
+    /* Preserve original design background from style.css */
+    transition:
+        box-shadow 0.3s ease,
+        background-color 0.3s ease,
+        background 0.3s ease;
+}
+
+html body .site-header.scrolled,
+html body .site-header.header-scrolled {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}

@@ -3153,3 +3153,552 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+/* =========================================================
+   ÉLORA — COMPLETE AUTO-ROTATING PRODUCT CAROUSEL
+   Automatic rotation | Dynamic content | Dots | Progress
+   Previous / Next | Swipe | Wishlist
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    "use strict";
+
+    const carousel = document.getElementById("arrivalCarousel");
+
+    if (!carousel) return;
+
+    const slides = [...carousel.querySelectorAll(".arrival-slide")];
+
+    const prevButton = document.getElementById("arrivalPrev");
+    const nextButton = document.getElementById("arrivalNext");
+
+    const heroTitle = document.getElementById("arrivalProductTitle");
+    const heroCategory = document.getElementById("arrivalCategory");
+    const heroDescription = document.getElementById("arrivalDescription");
+    const heroPrice = document.getElementById("arrivalPrice");
+    const heroOldPrice = document.getElementById("arrivalOldPrice");
+    const heroBadge = document.getElementById("arrivalBadge");
+    const shopLink = document.getElementById("arrivalShopLink");
+
+    const dots = [
+        ...document.querySelectorAll(".arrival-dot")
+    ];
+
+    const currentNumber = document.getElementById("arrivalCurrentNumber");
+    const progressBar = document.getElementById("arrivalProgress");
+
+    const wishlistButton = document.getElementById("arrivalWishlist");
+
+    if (!slides.length) return;
+
+    /* SETTINGS */
+
+    const ROTATION_DELAY = 4500;
+    const ANIMATION_DURATION = 850;
+
+    let currentIndex = Math.max(
+        0,
+        slides.findIndex(slide =>
+            slide.classList.contains("is-active")
+        )
+    );
+
+    let autoplayTimer = null;
+    let progressAnimation = null;
+    let isAnimating = false;
+
+    /* ==========================================
+       PRODUCT DATA
+    ========================================== */
+
+    function getProduct(slide) {
+        return {
+            category: slide.dataset.category || "",
+            name: slide.dataset.name || "",
+            description: slide.dataset.description || "",
+            price: slide.dataset.price || "",
+            oldPrice: slide.dataset.oldPrice || "",
+            badge: slide.dataset.badge || "",
+            link: slide.dataset.link || "index.html"
+        };
+    }
+
+    /* ==========================================
+       UPDATE HERO CONTENT
+    ========================================== */
+
+    function updateContent(index) {
+
+        const product = getProduct(slides[index]);
+
+        if (heroCategory) {
+            heroCategory.textContent = product.category;
+        }
+
+        if (heroTitle) {
+            heroTitle.textContent = product.name;
+        }
+
+        if (heroDescription) {
+            heroDescription.textContent = product.description;
+        }
+
+        if (heroPrice) {
+            heroPrice.textContent = product.price;
+        }
+
+        if (heroOldPrice) {
+            heroOldPrice.textContent = product.oldPrice;
+        }
+
+        if (heroBadge) {
+            heroBadge.textContent = product.badge;
+        }
+
+        if (shopLink) {
+            shopLink.href = product.link;
+        }
+
+        if (currentNumber) {
+            currentNumber.textContent =
+                String(index + 1).padStart(2, "0");
+        }
+
+        /* Update pagination */
+
+        dots.forEach((dot, dotIndex) => {
+
+            const isCurrent = dotIndex === index;
+
+            dot.classList.toggle("active", isCurrent);
+
+            if (isCurrent) {
+                dot.setAttribute("aria-current", "true");
+            } else {
+                dot.removeAttribute("aria-current");
+            }
+        });
+
+        /* Update image indexes */
+
+        slides.forEach((slide, slideIndex) => {
+
+            const number = slide.querySelector(".product-index");
+
+            if (number) {
+                number.textContent =
+                    `${String(slideIndex + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
+            }
+        });
+
+        /* Reset wishlist state for new product */
+
+        if (wishlistButton) {
+
+            wishlistButton.setAttribute("aria-pressed", "false");
+
+            const icon = wishlistButton.querySelector("i");
+
+            if (icon) {
+                icon.classList.remove("fa-solid");
+                icon.classList.add("fa-regular");
+            }
+        }
+
+        /* Notify other scripts if needed */
+
+        carousel.dispatchEvent(
+            new CustomEvent("arrival:change", {
+                detail: {
+                    index,
+                    product
+                }
+            })
+        );
+    }
+
+    /* ==========================================
+       SHOW SLIDE
+    ========================================== */
+
+    function showSlide(index, direction = "next", force = false) {
+
+        if (isAnimating && !force) return;
+
+        const nextIndex =
+            (index + slides.length) % slides.length;
+
+        if (nextIndex === currentIndex && !force) return;
+
+        isAnimating = true;
+
+        const oldSlide = slides[currentIndex];
+        const newSlide = slides[nextIndex];
+
+        /* Reset previous slide */
+
+        slides.forEach(slide => {
+
+            slide.classList.remove(
+                "is-entering",
+                "is-leaving",
+                "slide-next",
+                "slide-prev"
+            );
+
+        });
+
+        oldSlide.classList.remove("is-active");
+        oldSlide.classList.add("is-leaving");
+
+        oldSlide.setAttribute("aria-hidden", "true");
+
+        /* Activate next slide */
+
+        newSlide.classList.add("is-active", "is-entering");
+
+        newSlide.classList.toggle(
+            "slide-next",
+            direction === "next"
+        );
+
+        newSlide.classList.toggle(
+            "slide-prev",
+            direction === "prev"
+        );
+
+        newSlide.setAttribute("aria-hidden", "false");
+
+        currentIndex = nextIndex;
+
+        updateContent(currentIndex);
+
+        /* Clean animation classes */
+
+        window.setTimeout(() => {
+
+            slides.forEach(slide => {
+
+                slide.classList.remove(
+                    "is-entering",
+                    "is-leaving",
+                    "slide-next",
+                    "slide-prev"
+                );
+
+            });
+
+            isAnimating = false;
+
+        }, ANIMATION_DURATION);
+    }
+
+    /* ==========================================
+       AUTOPLAY PROGRESS BAR
+    ========================================== */
+
+    function startProgress() {
+
+        if (!progressBar) return;
+
+        if (progressAnimation) {
+            cancelAnimationFrame(progressAnimation);
+        }
+
+        progressBar.style.transition = "none";
+        progressBar.style.width = "0%";
+
+        /* Force browser layout */
+
+        void progressBar.offsetWidth;
+
+        progressBar.style.transition =
+            `width ${ROTATION_DELAY}ms linear`;
+
+        progressBar.style.width = "100%";
+    }
+
+    /* ==========================================
+       AUTOPLAY
+    ========================================== */
+
+    function stopAutoplay() {
+
+        if (autoplayTimer) {
+            clearTimeout(autoplayTimer);
+            autoplayTimer = null;
+        }
+
+        if (progressAnimation) {
+            cancelAnimationFrame(progressAnimation);
+            progressAnimation = null;
+        }
+
+        if (progressBar) {
+            progressBar.style.transition = "none";
+        }
+    }
+
+    function startAutoplay() {
+
+        stopAutoplay();
+
+        if (document.hidden) return;
+
+        startProgress();
+
+        autoplayTimer = window.setTimeout(() => {
+
+            showSlide(currentIndex + 1, "next");
+
+            startAutoplay();
+
+        }, ROTATION_DELAY);
+    }
+
+    /* ==========================================
+       PREVIOUS / NEXT BUTTONS
+    ========================================== */
+
+    if (nextButton) {
+
+        nextButton.addEventListener("click", () => {
+
+            showSlide(currentIndex + 1, "next");
+
+            startAutoplay();
+
+        });
+    }
+
+    if (prevButton) {
+
+        prevButton.addEventListener("click", () => {
+
+            showSlide(currentIndex - 1, "prev");
+
+            startAutoplay();
+
+        });
+    }
+
+    /* ==========================================
+       PAGINATION DOTS
+    ========================================== */
+
+    dots.forEach((dot, index) => {
+
+        dot.addEventListener("click", () => {
+
+            if (index === currentIndex) {
+                startAutoplay();
+                return;
+            }
+
+            showSlide(
+                index,
+                index > currentIndex ? "next" : "prev"
+            );
+
+            startAutoplay();
+
+        });
+    });
+
+    /* ==========================================
+       PAUSE WHEN HOVERING
+    ========================================== */
+
+    carousel.addEventListener("mouseenter", stopAutoplay);
+
+    carousel.addEventListener("mouseleave", startAutoplay);
+
+    /* Also pause while interacting with hero content */
+
+    const heroContent = document.getElementById("arrivalHeroContent");
+
+    if (heroContent) {
+
+        heroContent.addEventListener("mouseenter", stopAutoplay);
+
+        heroContent.addEventListener("mouseleave", startAutoplay);
+    }
+
+    /* ==========================================
+       PAUSE WHEN TAB IS HIDDEN
+    ========================================== */
+
+    document.addEventListener("visibilitychange", () => {
+
+        if (document.hidden) {
+            stopAutoplay();
+        } else {
+            startAutoplay();
+        }
+
+    });
+
+    /* ==========================================
+       TOUCH SWIPE
+    ========================================== */
+
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    carousel.addEventListener("touchstart", event => {
+
+        if (!event.changedTouches.length) return;
+
+        touchStartX = event.changedTouches[0].clientX;
+        touchStartY = event.changedTouches[0].clientY;
+
+    }, { passive: true });
+
+    carousel.addEventListener("touchend", event => {
+
+        if (!event.changedTouches.length) return;
+
+        const touchEndX = event.changedTouches[0].clientX;
+        const touchEndY = event.changedTouches[0].clientY;
+
+        const deltaX = touchEndX - touchStartX;
+        const deltaY = touchEndY - touchStartY;
+
+        if (Math.abs(deltaX) < 50) return;
+        if (Math.abs(deltaX) < Math.abs(deltaY)) return;
+
+        if (deltaX < 0) {
+            showSlide(currentIndex + 1, "next");
+        } else {
+            showSlide(currentIndex - 1, "prev");
+        }
+
+        startAutoplay();
+
+    }, { passive: true });
+
+    /* ==========================================
+       KEYBOARD CONTROLS
+    ========================================== */
+
+    carousel.addEventListener("keydown", event => {
+
+        if (event.key === "ArrowRight") {
+            showSlide(currentIndex + 1, "next");
+            startAutoplay();
+        }
+
+        if (event.key === "ArrowLeft") {
+            showSlide(currentIndex - 1, "prev");
+            startAutoplay();
+        }
+    });
+
+    /* ==========================================
+       WISHLIST BUTTON
+    ========================================== */
+
+    if (wishlistButton) {
+
+        wishlistButton.addEventListener("click", () => {
+
+            const isSaved =
+                wishlistButton.getAttribute("aria-pressed") === "true";
+
+            wishlistButton.setAttribute(
+                "aria-pressed",
+                String(!isSaved)
+            );
+
+            const icon = wishlistButton.querySelector("i");
+
+            if (icon) {
+
+                icon.classList.toggle("fa-solid", !isSaved);
+
+                icon.classList.toggle("fa-regular", isSaved);
+            }
+        });
+    }
+
+    /* ==========================================
+       INITIALIZE
+    ========================================== */
+
+    slides.forEach((slide, index) => {
+
+        slide.classList.toggle(
+            "is-active",
+            index === currentIndex
+        );
+
+        slide.classList.remove(
+            "is-entering",
+            "is-leaving",
+            "slide-next",
+            "slide-prev"
+        );
+
+        slide.setAttribute(
+            "aria-hidden",
+            index === currentIndex ? "false" : "true"
+        );
+    });
+
+    updateContent(currentIndex);
+    startAutoplay();
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   ÉLAN STUDIO — AUTOMATIC HERO MODEL SLIDER
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const slides = document.querySelectorAll(".hero-model-slide");
+
+    if (!slides.length) return;
+
+    let currentSlide = 0;
+    const slideDuration = 3500; // 3.5 seconds
+
+    function showSlide(index) {
+
+        slides.forEach((slide, i) => {
+
+            slide.classList.remove("active");
+
+            if (i === index) {
+                slide.classList.add("active");
+            }
+
+        });
+
+    }
+
+    // Initial slide
+    showSlide(currentSlide);
+
+    // Automatic slide change
+    setInterval(() => {
+
+        currentSlide = (currentSlide + 1) % slides.length;
+
+        showSlide(currentSlide);
+
+    }, slideDuration);
+
+});

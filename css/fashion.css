@@ -42,7 +42,7 @@ html {
 
 body {
     width: 100%;
-    overflow-x: hidden;
+    overflow-x: clip;
     background: var(--arrival-bg);
     color: var(--arrival-dark);
     font-family: var(--arrival-sans);
