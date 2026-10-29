@@ -531,24 +531,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function openDrawer() {
 
-        if (!mobileDrawer || !mobileOverlay) return;
+        if (!mobileDrawer) return;
 
         mobileDrawer.classList.add("active");
-        mobileOverlay.classList.add("active");
+        if (mobileOverlay) mobileOverlay.classList.add("active");
 
         body.classList.add("drawer-open");
+        document.documentElement.classList.add("drawer-open");
 
         mobileDrawer.setAttribute("aria-hidden", "false");
 
-        mobileMenuToggle?.setAttribute(
-            "aria-expanded",
-            "true"
-        );
-
-        mobileMenuToggle?.setAttribute(
-            "aria-label",
-            "Close navigation menu"
-        );
+        if (mobileMenuToggle) {
+            mobileMenuToggle.setAttribute("aria-expanded", "true");
+            mobileMenuToggle.setAttribute("aria-label", "Close navigation menu");
+            mobileMenuToggle.classList.add("is-active");
+        }
 
         drawerClose?.focus();
 
@@ -557,32 +554,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function closeDrawer() {
 
-        if (!mobileDrawer || !mobileOverlay) return;
+        if (!mobileDrawer) return;
 
         mobileDrawer.classList.remove("active");
-        mobileOverlay.classList.remove("active");
+        if (mobileOverlay) mobileOverlay.classList.remove("active");
 
         body.classList.remove("drawer-open");
+        document.documentElement.classList.remove("drawer-open");
 
         mobileDrawer.setAttribute("aria-hidden", "true");
 
-        mobileMenuToggle?.setAttribute(
-            "aria-expanded",
-            "false"
-        );
-
-        mobileMenuToggle?.setAttribute(
-            "aria-label",
-            "Open navigation menu"
-        );
+        if (mobileMenuToggle) {
+            mobileMenuToggle.setAttribute("aria-expanded", "false");
+            mobileMenuToggle.setAttribute("aria-label", "Open navigation menu");
+            mobileMenuToggle.classList.remove("is-active");
+        }
 
     }
 
+    window.eloraOpenDrawer = openDrawer;
+    window.eloraCloseDrawer = closeDrawer;
 
-    mobileMenuToggle?.addEventListener("click", () => {
+    mobileMenuToggle?.addEventListener("click", event => {
+
+        event.preventDefault();
 
         const isOpen =
-            mobileDrawer?.classList.contains("active");
+            mobileDrawer?.classList.contains("active") ||
+            mobileMenuToggle.getAttribute("aria-expanded") === "true";
 
         if (isOpen) {
             closeDrawer();
@@ -593,10 +592,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    drawerClose?.addEventListener("click", closeDrawer);
+    drawerClose?.addEventListener("click", event => {
+        event.preventDefault();
+        closeDrawer();
+    });
 
 
-    mobileOverlay?.addEventListener("click", closeDrawer);
+    mobileOverlay?.addEventListener("click", event => {
+        event.preventDefault();
+        closeDrawer();
+    });
 
 
     /* Close drawer when a navigation link is selected */
@@ -1690,82 +1695,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       MOBILE DRAWER
+       MOBILE DRAWER (Delegates to centralized main nav)
     ===================================================== */
 
-    const menuToggle = select("#menuToggle");
-    const mobileDrawer = select("#mobileDrawer");
-    const mobileOverlay = select("#mobileOverlay");
-    const drawerClose = select("#drawerClose");
-
-
     function openDrawer() {
-
-        if (!mobileDrawer || !mobileOverlay || !menuToggle) return;
-
-        mobileDrawer.classList.add("active");
-        mobileOverlay.classList.add("active");
-
-        menuToggle.setAttribute("aria-expanded", "true");
-        menuToggle.setAttribute("aria-label", "Close navigation");
-
-        mobileDrawer.setAttribute("aria-hidden", "false");
-
-        lockBody();
-
-        if (drawerClose) {
-            drawerClose.focus();
+        if (typeof window.eloraOpenDrawer === "function") {
+            window.eloraOpenDrawer();
         }
-
     }
-
 
     function closeDrawer() {
-
-        if (!mobileDrawer || !mobileOverlay || !menuToggle) return;
-
-        mobileDrawer.classList.remove("active");
-        mobileOverlay.classList.remove("active");
-
-        menuToggle.setAttribute("aria-expanded", "false");
-        menuToggle.setAttribute("aria-label", "Open navigation");
-
-        mobileDrawer.setAttribute("aria-hidden", "true");
-
-        unlockBody();
-
+        if (typeof window.eloraCloseDrawer === "function") {
+            window.eloraCloseDrawer();
+        }
     }
-
-
-    if (menuToggle) {
-
-        menuToggle.addEventListener("click", () => {
-
-            const isOpen =
-                menuToggle.getAttribute("aria-expanded") === "true";
-
-            isOpen ? closeDrawer() : openDrawer();
-
-        });
-
-    }
-
-
-    if (drawerClose) {
-        drawerClose.addEventListener("click", closeDrawer);
-    }
-
-
-    if (mobileOverlay) {
-        mobileOverlay.addEventListener("click", closeDrawer);
-    }
-
-
-    selectAll(".drawer-navigation a").forEach(link => {
-
-        link.addEventListener("click", closeDrawer);
-
-    });
 
 
 
@@ -2617,25 +2560,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    if (loginModalOpen) {
-
-        loginModalOpen.addEventListener("click", openLoginModal);
-
-    }
-
-
-    if (loginModalClose) {
-
-        loginModalClose.addEventListener("click", closeLoginModal);
-
-    }
-
-
-    if (loginModalOverlay) {
-
-        loginModalOverlay.addEventListener("click", closeLoginModal);
-
-    }
+    /* Login modal open/close is handled centrally by the main module */
 
 
     loginTabs.forEach(tab => {
@@ -2734,22 +2659,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       ESC KEY — CLOSE OPEN OVERLAYS
+       ESC KEY — CLOSE OPEN OVERLAYS (Delegated)
     ===================================================== */
 
-    document.addEventListener("keydown", event => {
-
-        if (event.key !== "Escape") return;
-
-
-        closeDrawer();
-
-        closeSearch();
-
-        closeLoginModal();
-
-
-    });
+    window.closeSearch = closeSearch;
 
 
 

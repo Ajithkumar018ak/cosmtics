@@ -282,6 +282,7 @@
     color: white;
 }
 
+.new-arrivals-page .mobile-menu-toggle,
 .new-arrivals-page .menu-toggle {
     display: none;
     width: 40px;
@@ -295,6 +296,7 @@
     cursor: pointer;
 }
 
+.new-arrivals-page .mobile-menu-toggle span,
 .new-arrivals-page .menu-toggle span {
     display: block;
     width: 100%;
@@ -303,10 +305,12 @@
     transition: transform 0.3s ease;
 }
 
+.new-arrivals-page .mobile-menu-toggle[aria-expanded="true"] span:first-child,
 .new-arrivals-page .menu-toggle[aria-expanded="true"] span:first-child {
     transform: translateY(4px) rotate(45deg);
 }
 
+.new-arrivals-page .mobile-menu-toggle[aria-expanded="true"] span:last-child,
 .new-arrivals-page .menu-toggle[aria-expanded="true"] span:last-child {
     transform: translateY(-4px) rotate(-45deg);
 }
@@ -1888,321 +1892,6 @@
 }
 
 
-/* =========================================================
-   FOOTER
-========================================================= */
-
-.new-arrivals-page .site-footer {
-    padding-top: 80px;
-    background: #29251f;
-    color: #f8f5ef;
-}
-
-.new-arrivals-page .footer-top {
-    display: grid;
-    grid-template-columns: 1.5fr 0.8fr 1fr 1.1fr;
-    gap: 55px;
-    padding-bottom: 65px;
-}
-
-.new-arrivals-page .footer-logo {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.new-arrivals-page .footer-logo-mark {
-    color: var(--arrival-gold-light);
-    font-family: var(--arrival-serif);
-    font-size: 42px;
-    line-height: 1;
-}
-
-.new-arrivals-page .footer-logo-name {
-    font-size: 17px;
-    font-weight: 600;
-    letter-spacing: 4px;
-}
-
-.new-arrivals-page .footer-brand-description {
-    max-width: 290px;
-    margin: 23px 0;
-    color: #b5aa9a;
-    font-size: 10px;
-    line-height: 2;
-}
-
-.new-arrivals-page .footer-socials {
-    display: flex;
-    gap: 10px;
-}
-
-.new-arrivals-page .footer-socials a {
-    display: grid;
-    place-items: center;
-    width: 37px;
-    height: 37px;
-    border: 1px solid #51483d;
-    color: #d7c9b3;
-    transition: all 0.3s ease;
-}
-
-.new-arrivals-page .footer-socials a:hover {
-    background: var(--arrival-gold);
-    border-color: var(--arrival-gold);
-    color: white;
-}
-
-.new-arrivals-page .footer-links-column h3,
-.new-arrivals-page .footer-contact-column h3 {
-    margin-bottom: 24px;
-    font-family: var(--arrival-serif);
-    font-size: 19px;
-}
-
-.new-arrivals-page .footer-links-column nav {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 13px;
-}
-
-.new-arrivals-page .footer-links-column nav a {
-    color: #b5aa9a;
-    font-size: 10px;
-    transition: color 0.3s ease;
-}
-
-.new-arrivals-page .footer-links-column nav a:hover {
-    color: var(--arrival-gold-light);
-}
-
-.new-arrivals-page .footer-contact-column > p {
-    color: #b5aa9a;
-    font-size: 10px;
-    line-height: 2;
-}
-
-.new-arrivals-page .footer-contact-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 9px;
-    color: var(--arrival-gold-light);
-    font-size: 10px;
-}
-
-.new-arrivals-page .footer-contact-link i {
-    transition: transform 0.3s ease;
-}
-
-.new-arrivals-page .footer-contact-link:hover i {
-    transform: translateX(5px);
-}
-
-.new-arrivals-page .footer-contact-caption {
-    display: block;
-    margin-top: 32px;
-    color: #8e8272;
-    font-size: 8px;
-    letter-spacing: 1.6px;
-}
-
-.new-arrivals-page .footer-bottom {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    min-height: 75px;
-    border-top: 1px solid #484036;
-}
-
-.new-arrivals-page .footer-bottom > p {
-    margin: 0;
-    color: #a79b8a;
-    font-size: 8px;
-    letter-spacing: 1px;
-}
-
-.new-arrivals-page .footer-bottom-center {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    color: #b5aa9a;
-    font-size: 8px;
-    letter-spacing: 1.5px;
-}
-
-.new-arrivals-page .footer-bottom-center span {
-    color: var(--arrival-gold-light);
-    font-family: var(--arrival-serif);
-    font-size: 21px;
-}
-
-
-/* =========================================================
-   SEARCH MODAL
-========================================================= */
-
-.new-arrivals-page .search-modal {
-    position: fixed;
-    inset: 0;
-    z-index: 1500;
-    display: grid;
-    place-items: center;
-    padding: 20px;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-
-.new-arrivals-page .search-modal.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.new-arrivals-page .search-modal-backdrop {
-    position: absolute;
-    inset: 0;
-    background: rgba(30, 26, 21, 0.67);
-}
-
-.new-arrivals-page .search-modal-content {
-    position: relative;
-    width: min(620px, 100%);
-    padding: 65px 55px;
-    background: var(--arrival-bg);
-    transform: translateY(20px);
-    transition: transform 0.4s ease;
-}
-
-.new-arrivals-page .search-modal.active .search-modal-content {
-    transform: translateY(0);
-}
-
-.new-arrivals-page .search-close {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    display: grid;
-    place-items: center;
-    width: 38px;
-    height: 38px;
-    border: 1px solid var(--arrival-border);
-    background: transparent;
-    cursor: pointer;
-}
-
-.new-arrivals-page .search-modal-content h2 {
-    margin: 18px 0 30px;
-    font-size: clamp(29px, 4vw, 43px);
-    line-height: 1.2;
-}
-
-.new-arrivals-page .search-form {
-    display: flex;
-    border-bottom: 1px solid var(--arrival-dark);
-}
-
-.new-arrivals-page .search-form input {
-    width: 100%;
-    min-width: 0;
-    padding: 17px 0;
-    border: 0;
-    outline: none;
-    background: transparent;
-    font-size: 12px;
-}
-
-.new-arrivals-page .search-form button {
-    width: 45px;
-    flex-shrink: 0;
-    border: 0;
-    background: transparent;
-    color: var(--arrival-gold);
-    cursor: pointer;
-}
-
-.new-arrivals-page .search-suggestions-label {
-    margin: 27px 0 12px;
-    color: var(--arrival-muted);
-    font-size: 8px;
-    letter-spacing: 1.7px;
-}
-
-.new-arrivals-page .search-suggestions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-.new-arrivals-page .search-suggestions a {
-    padding: 8px 12px;
-    border: 1px solid var(--arrival-border);
-    font-size: 10px;
-    transition: all 0.3s ease;
-}
-
-.new-arrivals-page .search-suggestions a:hover {
-    background: var(--arrival-dark);
-    color: white;
-}
-
-
-
-/* =========================================================
-   SCROLL TO TOP
-========================================================= */
-
-.new-arrivals-page .scroll-top {
-    position: fixed;
-    right: 25px;
-    bottom: 25px;
-    z-index: 900;
-    display: grid;
-    place-items: center;
-    width: 48px;
-    height: 48px;
-    border: 1px solid rgba(181, 150, 97, 0.45);
-    border-radius: 50%;
-    background: var(--arrival-dark);
-    color: white;
-    cursor: pointer;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transform: translateY(15px);
-    transition: all 0.35s ease;
-}
-
-.new-arrivals-page .scroll-top.show {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translateY(0);
-}
-
-.new-arrivals-page .scroll-top:hover {
-    background: var(--arrival-gold);
-    border-color: var(--arrival-gold);
-    transform: translateY(-5px);
-}
-
-
-/* =========================================================
-   REVEAL ANIMATION
-========================================================= */
-
-.new-arrivals-page .reveal-on-scroll {
-    opacity: 0;
-    transform: translateY(25px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-}
-
-.new-arrivals-page .reveal-on-scroll.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
 
 
 /* =========================================================
@@ -2219,3 +1908,79 @@
         transition-duration: 0.01ms !important;
     }
 }
+
+
+
+
+
+
+
+
+
+/* =========================================
+   ÉLORA — FOOTER LOGO
+========================================= */
+
+.footer-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: fit-content;
+    max-width: 100%;
+    text-decoration: none;
+    line-height: 0;
+    flex-shrink: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* LOGO IMAGE */
+.footer-logo img {
+    display: block;
+    width: 180px;
+    height: 75px;
+    max-width: 100%;
+    object-fit: contain;
+    object-position: left center;
+    transition: transform 0.35s ease;
+}
+
+/* HOVER EFFECT */
+.footer-logo:hover {
+    opacity: 0.9;
+}
+
+.footer-logo:hover img {
+    transform: scale(1.04);
+}
+
+/* TABLET */
+@media (max-width: 992px) {
+    .footer-logo img {
+        width: 160px;
+        height: 68px;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 576px) {
+    .footer-logo img {
+        width: 145px;
+        height: 60px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -7879,3 +7879,64 @@ ul {
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =====================================
+   ÉLORA — BRAND LOGO
+===================================== */
+
+.brand-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    text-decoration: none;
+    line-height: 0;
+}
+
+.logo-image {
+    display: block;
+    width: 180px;
+    height: 65px;
+    object-fit: contain;
+    object-position: left center;
+    transition: transform 0.3s ease;
+}
+
+.brand-logo:hover .logo-image {
+    transform: scale(1.04);
+}
+
+/* TABLET */
+@media (max-width: 992px) {
+    .logo-image {
+        width: 155px;
+        height: 58px;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 576px) {
+    .logo-image {
+        width: 135px;
+        height: 50px;
+    }
+}
