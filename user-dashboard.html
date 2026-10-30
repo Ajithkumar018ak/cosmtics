@@ -1,0 +1,681 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>user
+     Dashboard</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<style>
+:root{
+    --primary:#b76e79;
+    --primary-dark:#98535f;
+    --soft:#fbf2f3;
+    --dark:#292329;
+    --text:#81777d;
+    --border:#eee7e9;
+    --white:#fff;
+    --sidebar:255px;
+    --header:76px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"DM Sans",sans-serif;background:#faf9f9;color:var(--dark);overflow:hidden}
+button,a{font:inherit}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer}
+img{display:block;width:100%;object-fit:cover}
+
+/* SIDEBAR */
+.sidebar{
+    position:fixed;inset:0 auto 0 0;width:var(--sidebar);
+    background:white;border-right:1px solid var(--border);
+    display:flex;flex-direction:column;z-index:100;
+    transition:transform .3s ease;
+}
+.brand{
+    min-height:var(--header);padding:0 25px;
+    display:flex;align-items:center;gap:12px;
+    border-bottom:1px solid var(--border);
+}
+.brand-mark{
+    width:44px;height:44px;display:grid;place-items:center;
+    background:var(--primary);color:white;border-radius:13px;
+    font:700 26px Georgia,serif;
+}
+.brand-name{display:block;font:800 15px Manrope;letter-spacing:1.5px}
+.brand-sub{display:block;font-size:9px;letter-spacing:2px;color:var(--text);margin-top:3px}
+.sidebar-content{padding:28px 16px;flex:1;overflow-y:auto}
+.nav-label{padding:0 13px;margin-bottom:15px;font-size:10px;font-weight:800;letter-spacing:2px;color:#aaa}
+.nav-menu{display:grid;gap:7px}
+.nav-link{
+    display:flex;align-items:center;gap:13px;width:100%;
+    border:0;background:transparent;color:#777078;
+    padding:14px 15px;border-radius:10px;
+    text-align:left;font-size:13px;font-weight:600;transition:.25s;
+}
+.nav-link i{width:19px;font-size:16px}
+.nav-link:hover,.nav-link.active{background:var(--soft);color:var(--primary-dark)}
+.sidebar-bottom{padding:17px 16px 23px;border-top:1px solid var(--border)}
+.logout-btn{
+    display:flex;align-items:center;gap:13px;width:100%;
+    border:0;background:transparent;color:#b75d67;
+    padding:14px 15px;border-radius:10px;font-size:13px;font-weight:700;
+}
+.logout-btn:hover{background:#fff0f0}
+
+/* MAIN + STICKY HEADER */
+.main-area{margin-left:var(--sidebar);height:100vh;display:flex;flex-direction:column}
+.top-header{
+    height:var(--header);min-height:var(--header);
+    position:sticky;top:0;z-index:50;background:rgba(255,255,255,.97);
+    border-bottom:1px solid var(--border);
+    display:flex;align-items:center;justify-content:space-between;padding:0 35px;
+}
+.header-left,.header-right{display:flex;align-items:center;gap:15px}
+.header-title{font:800 17px Manrope}
+.header-right{gap:20px}
+.header-icon{
+    width:39px;height:39px;display:grid;place-items:center;
+    border:1px solid var(--border);border-radius:50%;
+    color:#71676d;background:white;
+}
+.header-user{display:flex;align-items:center;gap:10px}
+.header-user img{width:39px;height:39px;border-radius:50%}
+.header-user strong{display:block;font-size:12px}
+.header-user small{font-size:10px;color:var(--text)}
+.menu-toggle{display:none;border:0;background:none;font-size:20px}
+
+/* CONTENT */
+.content-area{flex:1;overflow-y:auto;padding:34px 35px 55px;scroll-behavior:smooth}
+.page-section{display:none;animation:fadeIn .3s ease}
+.page-section.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.page-heading{margin-bottom:27px}
+.eyebrow{display:block;color:var(--primary);font-size:10px;font-weight:800;letter-spacing:2px;margin-bottom:9px}
+.page-heading h1{font:800 clamp(25px,3vw,32px) Manrope;margin-bottom:7px}
+.page-heading p{font-size:13px;color:var(--text);line-height:1.7}
+.section-heading{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:15px;margin-bottom:19px;
+}
+.section-heading h2{font:800 16px Manrope}
+.section-heading p{font-size:11px;color:var(--text);margin-top:5px}
+
+/* BUTTONS */
+.primary-btn,.outline-btn,.text-link,.danger-btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    border-radius:7px;padding:11px 16px;font-size:11px;font-weight:700;
+    transition:.25s;border:1px solid var(--primary);
+}
+.primary-btn{background:var(--primary);color:white}
+.primary-btn:hover{background:var(--primary-dark)}
+.outline-btn{color:var(--primary-dark);background:white}
+.outline-btn:hover{background:var(--soft)}
+.text-link{border:0;padding:5px 0;background:transparent;color:var(--primary-dark)}
+.danger-btn{background:white;color:#b75d67;border-color:#f0d9dc}
+
+/* WELCOME */
+.welcome-banner{
+    background:#f4e5e6;border-radius:16px;min-height:220px;
+    padding:32px;display:flex;align-items:center;justify-content:space-between;
+    margin-bottom:25px;overflow:hidden;
+}
+.welcome-content{max-width:470px}
+.welcome-content>span{font-size:10px;letter-spacing:2px;font-weight:800;color:var(--primary-dark)}
+.welcome-content h2{font:800 clamp(23px,3vw,34px) Manrope;line-height:1.3;margin:12px 0}
+.welcome-content p{font-size:12px;color:#77676c;line-height:1.8;margin-bottom:18px}
+.welcome-image{width:220px;height:180px;object-fit:contain}
+
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
+.stat-card{padding:20px;background:white;border:1px solid var(--border);border-radius:12px}
+.stat-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.stat-icon{
+    width:40px;height:40px;display:grid;place-items:center;
+    border-radius:10px;background:var(--soft);color:var(--primary);font-size:15px;
+}
+.stat-card h3{font:800 25px Manrope}
+.stat-card p{font-size:11px;color:var(--text);margin-top:4px}
+.stat-note{font-size:9px;color:#49936a;margin-top:9px}
+
+/* PANELS */
+.panel{background:white;border:1px solid var(--border);border-radius:13px;padding:22px;min-width:0}
+.content-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:19px;margin-bottom:24px}
+.panel-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:19px}
+.panel-heading h3{font:800 14px Manrope}
+.panel-heading p{font-size:10px;color:var(--text);margin-top:4px}
+
+/* TABLE */
+.table-wrap{width:100%;overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:550px}
+th{text-align:left;color:#999;font-size:10px;padding:12px 10px;border-bottom:1px solid var(--border)}
+td{font-size:11px;color:#665e63;padding:14px 10px;border-bottom:1px solid #f4f0f1}
+.product-cell{display:flex;align-items:center;gap:10px;min-width:170px}
+.product-cell img{width:43px;height:48px;border-radius:7px}
+.product-cell strong{display:block;font-size:11px;color:var(--dark)}
+.product-cell small{display:block;font-size:9px;color:var(--text);margin-top:4px}
+.status{display:inline-block;padding:6px 9px;border-radius:20px;font-size:9px;font-weight:700;white-space:nowrap}
+.delivered{background:#eaf7ef;color:#398456}
+.shipped{background:#fff4e5;color:#b47b2b}
+.processing{background:#f0ebfa;color:#8160b1}
+
+/* ORDER GRID */
+.orders-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-bottom:22px}
+.order-summary-card{background:white;border:1px solid var(--border);border-radius:12px;padding:19px}
+.order-summary-card i{color:var(--primary);font-size:18px;margin-bottom:13px}
+.order-summary-card h3{font:800 23px Manrope}
+.order-summary-card p{font-size:11px;color:var(--text);margin-top:4px}
+.orders-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.order-card{background:white;border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:.25s}
+.order-card:hover,.wishlist-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(50,25,35,.07)}
+.order-image{height:190px;background:#f8f0f1;position:relative}
+.order-image img{height:100%;object-fit:cover}
+.order-number{
+    position:absolute;left:11px;top:11px;background:white;
+    border-radius:5px;padding:6px 9px;font-size:9px;font-weight:700;
+}
+.order-info{padding:15px}
+.order-category{font-size:9px;letter-spacing:1px;color:var(--text)}
+.order-info h3{font-size:13px;margin:7px 0}
+.order-meta{display:flex;justify-content:space-between;gap:8px;font-size:10px;color:var(--text);margin:10px 0}
+.order-price{font:800 15px Manrope;color:var(--primary-dark);margin:11px 0}
+.order-info .outline-btn{width:100%}
+
+/* WISHLIST GRID */
+.wishlist-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.wishlist-card{background:white;border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:.25s}
+.wishlist-image{height:205px;background:#f7eeee;position:relative}
+.wishlist-image img{height:100%;object-fit:cover}
+.heart{
+    position:absolute;right:12px;top:12px;width:33px;height:33px;
+    display:grid;place-items:center;background:white;border-radius:50%;color:var(--primary);
+}
+.wishlist-info{padding:15px}
+.wishlist-info small{font-size:9px;color:var(--text);letter-spacing:1px}
+.wishlist-info h3{font-size:12px;line-height:1.5;margin:6px 0}
+.wishlist-price{font:800 14px Manrope;color:var(--primary-dark);margin:10px 0 13px}
+.wishlist-info .primary-btn{width:100%}
+
+/* PROFILE */
+.profile-layout{display:grid;grid-template-columns:290px 1fr;gap:20px}
+.profile-card{text-align:center}
+.profile-photo{width:105px;height:105px;border-radius:50%;margin:0 auto 15px;border:5px solid var(--soft)}
+.profile-card h3{font:800 17px Manrope}
+.profile-card p{font-size:11px;color:var(--text);margin-top:6px}
+.profile-badge{display:inline-block;padding:7px 12px;border-radius:20px;background:var(--soft);color:var(--primary-dark);font-size:9px;margin-top:13px}
+.profile-details{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.detail-item{padding:14px;background:#fcfafa;border-radius:8px}
+.detail-item small{display:block;font-size:10px;color:var(--text);margin-bottom:7px}
+.detail-item strong{font-size:12px;overflow-wrap:anywhere}
+
+/* SETTINGS */
+.settings-layout{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.settings-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 0;border-bottom:1px solid var(--border)}
+.settings-item:last-child{border-bottom:0}
+.settings-item-left{display:flex;align-items:center;gap:12px}
+.settings-item-left>i{
+    width:37px;height:37px;display:grid;place-items:center;
+    background:var(--soft);color:var(--primary);border-radius:9px;
+}
+.settings-item strong{display:block;font-size:11px}
+.settings-item small{display:block;font-size:9px;color:var(--text);margin-top:4px}
+.settings-arrow{font-size:11px;color:#aaa}
+
+/* EXTRA CONTENT */
+.info-strip{
+    padding:19px;background:#fff8f8;border:1px solid #f1e3e5;
+    border-radius:12px;display:flex;align-items:center;gap:15px;margin-bottom:23px;
+}
+.info-strip>i{font-size:23px;color:var(--primary)}
+.info-strip h3{font-size:12px;margin-bottom:5px}
+.info-strip p{font-size:10px;color:var(--text);line-height:1.6}
+
+/* MOBILE */
+.mobile-overlay{
+    position:fixed;inset:0;background:rgba(25,18,22,.45);
+    z-index:90;opacity:0;visibility:hidden;transition:.3s;
+}
+.mobile-overlay.show{opacity:1;visibility:visible}
+
+@media(max-width:1150px){
+    .stats-grid{grid-template-columns:repeat(2,1fr)}
+    .wishlist-grid{grid-template-columns:repeat(3,1fr)}
+    .orders-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:800px){
+    .sidebar{transform:translateX(-100%);width:270px}
+    .sidebar.open{transform:translateX(0)}
+    .main-area{margin-left:0}
+    .menu-toggle{display:block}
+    .top-header{padding:0 20px}
+    .content-area{padding:25px 20px 40px}
+    .content-grid,.profile-layout{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+    :root{--header:65px}
+    .top-header{padding:0 14px}
+    .header-title{font-size:14px}
+    .header-right{gap:10px}
+    .header-user .user-text{display:none}
+    .content-area{padding:22px 14px 35px}
+    .welcome-banner{padding:22px;min-height:190px}
+    .welcome-content{max-width:72%}
+    .welcome-content h2{font-size:22px}
+    .welcome-content p{font-size:10px}
+    .welcome-image{width:110px;height:130px}
+    .stats-grid{gap:10px}
+    .stat-card{padding:14px}
+    .stat-card h3{font-size:21px}
+    .orders-summary{gap:9px}
+    .order-summary-card{padding:13px}
+    .order-summary-card h3{font-size:19px}
+    .orders-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+    .order-image{height:150px}
+    .order-info{padding:11px}
+    .order-info h3{font-size:11px}
+    .order-meta{font-size:9px;flex-wrap:wrap}
+    .wishlist-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+    .wishlist-image{height:155px}
+    .wishlist-info{padding:11px}
+    .wishlist-info h3{font-size:11px}
+    .profile-details,.settings-layout{grid-template-columns:1fr}
+    .panel{padding:16px}
+    .page-heading h1{font-size:25px}
+}
+@media(max-width:370px){
+    .orders-grid,.wishlist-grid{grid-template-columns:1fr}
+    .order-image,.wishlist-image{height:220px}
+    .welcome-image{width:90px}
+}
+
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.brand-logo {
+    width: 190px;
+    height: 65px;
+    object-fit: contain;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .brand-logo {
+        width: 150px;
+        height: 55px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+   <a href="index.html" class="brand" aria-label="Velvet Glow home">
+    <img src="assets/logo2.webp"
+         alt="Velvet Glow Logo"
+         class="brand-logo">
+</a>
+
+    <div class="sidebar-content">
+        <p class="nav-label">MENU</p>
+        <nav class="nav-menu">
+            <button class="nav-link active" data-section="dashboard"><i class="fa-solid fa-grid-2"></i>Dashboard</button>
+            <button class="nav-link" data-section="orders"><i class="fa-solid fa-box-open"></i>My Orders</button>
+            <button class="nav-link" data-section="wishlist"><i class="fa-regular fa-heart"></i>My Wishlist</button>
+            <button class="nav-link" data-section="profile"><i class="fa-regular fa-user"></i>My Profile</button>
+            <button class="nav-link" data-section="settings"><i class="fa-solid fa-sliders"></i>Settings</button>
+        </nav>
+    </div>
+
+    <div class="sidebar-bottom">
+        <a href="404.html" class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
+    </div>
+</aside>
+
+<div class="mobile-overlay" id="mobileOverlay"></div>
+
+<!-- MAIN -->
+<main class="main-area">
+
+<header class="top-header">
+    <div class="header-left">
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+        <h2 class="header-title" id="headerTitle">Dashboard</h2>
+    </div>
+
+    <div class="header-right">
+        <a href="404.html" class="header-icon" aria-label="Notifications"><i class="fa-regular fa-bell"></i></a>
+        <div class="header-user">
+            <img src="assets/t2.webp" alt="Sarah Johnson">
+            <div class="user-text">
+                <strong>Sarah Johnson</strong>
+                <small>Premium Member</small>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="content-area">
+
+<!-- DASHBOARD -->
+<section class="page-section active" id="dashboard">
+    <div class="page-heading">
+        <span class="eyebrow">MY ACCOUNT</span>
+        <h1>Welcome back, Sarah!</h1>
+        <p>Manage your orders, discover beauty favourites and enjoy your shopping experience.</p>
+    </div>
+
+    <div class="welcome-banner">
+        <div class="welcome-content">
+            <span>YOUR BEAUTY JOURNEY</span>
+            <h2>Beauty begins with taking care of yourself.</h2>
+            <p>Discover your favourite beauty essentials and make every day a little more beautiful.</p>
+            <a href="404.html" class="primary-btn">Explore Collection <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <img src="assets/c2.webp" alt="Beauty collection" class="welcome-image">
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card"><div class="stat-top"><span class="stat-icon"><i class="fa-solid fa-bag-shopping"></i></span><i class="fa-solid fa-arrow-up-right-from-square"></i></div><h3>12</h3><p>Total Orders</p><div class="stat-note">Your shopping history</div></div>
+        <div class="stat-card"><div class="stat-top"><span class="stat-icon"><i class="fa-solid fa-heart"></i></span><i class="fa-regular fa-heart"></i></div><h3>08</h3><p>Wishlist Items</p><div class="stat-note">Saved beauty products</div></div>
+        <div class="stat-card"><div class="stat-top"><span class="stat-icon"><i class="fa-solid fa-truck-fast"></i></span><i class="fa-solid fa-box"></i></div><h3>02</h3><p>Active Deliveries</p><div class="stat-note">Orders on the way</div></div>
+        <div class="stat-card"><div class="stat-top"><span class="stat-icon"><i class="fa-solid fa-gift"></i></span><i class="fa-solid fa-star"></i></div><h3>350</h3><p>Reward Points</p><div class="stat-note">Available reward points</div></div>
+    </div>
+
+    <div class="content-grid">
+        <div class="panel">
+            <div class="panel-heading">
+                <div><h3>Recent Orders</h3><p>Your latest shopping activity</p></div>
+                <button class="text-link" data-go-404>View all <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>PRODUCT</th><th>ORDER ID</th><th>STATUS</th></tr></thead>
+                    <tbody>
+                        <tr><td><div class="product-cell"><img src="assets/h5.webp" alt="Vitamin C Serum"><div><strong>Vitamin C Serum</strong><small>Skincare</small></div></div></td><td>#VG10245</td><td><span class="status delivered">Delivered</span></td></tr>
+                        <tr><td><div class="product-cell"><img src="assets/h25.webp" alt="Moisturizer"><div><strong>Daily Moisturizer</strong><small>Skincare</small></div></div></td><td>#VG10244</td><td><span class="status shipped">Shipped</span></td></tr>
+                        <tr><td><div class="product-cell"><img src="assets/h19.webp" alt="Lipstick"><div><strong>Velvet Lipstick</strong><small>Makeup</small></div></div></td><td>#VG10243</td><td><span class="status processing">Processing</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading"><div><h3>Shopping Benefits</h3><p>Your member privileges</p></div></div>
+            <div class="info-strip"><i class="fa-solid fa-truck-fast"></i><div><h3>Free Delivery</h3><p>Enjoy free shipping on eligible beauty orders.</p></div></div>
+            <div class="info-strip"><i class="fa-solid fa-gift"></i><div><h3>Reward Benefits</h3><p>Collect points and explore exclusive member rewards.</p></div></div>
+            <div class="info-strip"><i class="fa-solid fa-heart"></i><div><h3>Personal Wishlist</h3><p>Keep your favourite products saved in one place.</p></div></div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="section-heading">
+            <div><h2>Recommended For You</h2><p>Beauty essentials selected for your next routine</p></div>
+            <a href="404.html" class="text-link">Explore more <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="wishlist-grid">
+            <article class="wishlist-card"><div class="wishlist-image"><img src="assets/h22.webp" alt="Brightening serum"></div><div class="wishlist-info"><small>SKINCARE</small><h3>Brightening Face Serum</h3><div class="wishlist-price">₹899</div><a href="404.html" class="primary-btn">View Product</a></div></article>
+            <article class="wishlist-card"><div class="wishlist-image"><img src="assets/h9.webp" alt="Hydrating cream"></div><div class="wishlist-info"><small>SKINCARE</small><h3>Hydrating Face Cream</h3><div class="wishlist-price">₹749</div><a href="404.html" class="primary-btn">View Product</a></div></article>
+            <article class="wishlist-card"><div class="wishlist-image"><img src="assets/h18.webp" alt="Lipstick"></div><div class="wishlist-info"><small>MAKEUP</small><h3>Velvet Matte Lipstick</h3><div class="wishlist-price">₹599</div><a href="404.html" class="primary-btn">View Product</a></div></article>
+            <article class="wishlist-card"><div class="wishlist-image"><img src="assets/n1.webp" alt="Perfume"></div><div class="wishlist-info"><small>FRAGRANCE</small><h3>Floral Signature Perfume</h3><div class="wishlist-price">₹1,299</div><a href="404.html" class="primary-btn">View Product</a></div></article>
+        </div>
+    </div>
+</section>
+
+<!-- MY ORDERS -->
+<section class="page-section" id="orders">
+    <div class="page-heading">
+        <span class="eyebrow">SHOPPING HISTORY</span>
+        <h1>My Orders</h1>
+        <p>Track your purchases, review order information and check delivery status.</p>
+    </div>
+
+    <div class="orders-summary">
+        <div class="order-summary-card"><i class="fa-solid fa-box"></i><h3>12</h3><p>Total Orders</p></div>
+        <div class="order-summary-card"><i class="fa-solid fa-truck-fast"></i><h3>02</h3><p>In Transit</p></div>
+        <div class="order-summary-card"><i class="fa-solid fa-circle-check"></i><h3>10</h3><p>Delivered</p></div>
+    </div>
+
+    <div class="info-strip">
+        <i class="fa-solid fa-circle-info"></i>
+        <div><h3>Your Orders At A Glance</h3><p>Find your product details, order dates and delivery status below. These are sample dashboard records.</p></div>
+    </div>
+
+    <div class="section-heading">
+        <div><h2>All Orders</h2><p>Explore your recent purchases</p></div>
+        <a href="404.html" class="outline-btn"><i class="fa-solid fa-download"></i> Download Report</a>
+    </div>
+
+    <div class="orders-grid">
+
+        <article class="order-card">
+            <div class="order-image"><img src="assets/f6.webp" alt="Vitamin C serum"><span class="order-number">#VG10245</span></div>
+            <div class="order-info"><span class="order-category">SKINCARE</span><h3>Vitamin C Brightening Serum</h3><div class="order-meta"><span>25 Oct 2026</span><span>Qty: 1</span></div><span class="status delivered">Delivered</span><div class="order-price">₹899</div><a href="404.html" class="outline-btn">View Details <i class="fa-solid fa-arrow-right"></i></a></div>
+        </article>
+
+        <article class="order-card">
+            <div class="order-image"><img src="assets/f2.webp" alt="Daily moisturizer"><span class="order-number">#VG10244</span></div>
+            <div class="order-info"><span class="order-category">SKINCARE</span><h3>Daily Hydrating Moisturizer</h3><div class="order-meta"><span>23 Oct 2026</span><span>Qty: 1</span></div><span class="status shipped">Shipped</span><div class="order-price">₹749</div><a href="404.html" class="outline-btn">Track Order <i class="fa-solid fa-arrow-right"></i></a></div>
+        </article>
+
+        <article class="order-card">
+            <div class="order-image"><img src="assets/f4.webp" alt="Velvet lipstick"><span class="order-number">#VG10243</span></div>
+            <div class="order-info"><span class="order-category">MAKEUP</span><h3>Velvet Matte Lipstick</h3><div class="order-meta"><span>20 Oct 2026</span><span>Qty: 2</span></div><span class="status processing">Processing</span><div class="order-price">₹1,198</div><a href="404.html" class="outline-btn">View Details <i class="fa-solid fa-arrow-right"></i></a></div>
+        </article>
+
+        <article class="order-card">
+            <div class="order-image"><img src="assets/f3.webp" alt="Floral perfume"><span class="order-number">#VG10242</span></div>
+            <div class="order-info"><span class="order-category">FRAGRANCE</span><h3>Floral Signature Perfume</h3><div class="order-meta"><span>18 Oct 2026</span><span>Qty: 1</span></div><span class="status delivered">Delivered</span><div class="order-price">₹1,299</div><a href="404.html" class="outline-btn">View Details <i class="fa-solid fa-arrow-right"></i></a></div>
+        </article>
+
+        <article class="order-card">
+            <div class="order-image"><img src="assets/h2.webp" alt="Face cleanser"><span class="order-number">#VG10241</span></div>
+            <div class="order-info"><span class="order-category">SKINCARE</span><h3>Gentle Daily Face Cleanser</h3><div class="order-meta"><span>15 Oct 2026</span><span>Qty: 1</span></div><span class="status delivered">Delivered</span><div class="order-price">₹499</div><a href="404.html" class="outline-btn">View Details <i class="fa-solid fa-arrow-right"></i></a></div>
+        </article>
+
+        <article class="order-card">
+            <div class="order-image"><img src="assets/f15.webp" alt="Sunscreen"><span class="order-number">#VG10240</span></div>
+            <div class="order-info"><span class="order-category">SKINCARE</span><h3>Daily Protection Sunscreen</h3><div class="order-meta"><span>12 Oct 2026</span><span>Qty: 1</span></div><span class="status delivered">Delivered</span><div class="order-price">₹699</div><a href="404.html" class="outline-btn">View Details <i class="fa-solid fa-arrow-right"></i></a></div>
+        </article>
+
+    </div>
+</section>
+
+<!-- MY WISHLIST -->
+<section class="page-section" id="wishlist">
+    <div class="page-heading">
+        <span class="eyebrow">SAVED FOR LATER</span>
+        <h1>My Wishlist</h1>
+        <p>Your personal collection of beauty favourites. Keep the products you love close.</p>
+    </div>
+
+    <div class="orders-summary">
+        <div class="order-summary-card"><i class="fa-solid fa-heart"></i><h3>08</h3><p>Saved Products</p></div>
+        <div class="order-summary-card"><i class="fa-solid fa-spa"></i><h3>04</h3><p>Skincare Products</p></div>
+        <div class="order-summary-card"><i class="fa-solid fa-wand-magic-sparkles"></i><h3>04</h3><p>Beauty & Fragrance</p></div>
+    </div>
+
+    <div class="info-strip">
+        <i class="fa-regular fa-heart"></i>
+        <div><h3>Your Beauty Collection</h3><p>All your favourite skincare, makeup and fragrance products are collected here for easy access.</p></div>
+    </div>
+
+    <div class="section-heading">
+        <div><h2>Saved Products</h2><p>8 products in your wishlist</p></div>
+        <a href="404.html" class="outline-btn">Explore Products <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+
+    <div class="wishlist-grid">
+
+        <article class="wishlist-card"><div class="wishlist-image"><img src="assets/l.webp" alt="Vitamin C brightening serum"><span class="heart"><i class="fa-solid fa-heart"></i></span></div><div class="wishlist-info"><small>SKINCARE</small><h3>Vitamin C Brightening Serum</h3><div class="wishlist-price">₹899</div><a href="404.html" class="primary-btn">Add to Cart <i class="fa-solid fa-bag-shopping"></i></a></div></article>
+
+        <article class="wishlist-card"><div class="wishlist-image"><img src="assets/n11.webp" alt="Hydrating face cream"><span class="heart"><i class="fa-solid fa-heart"></i></span></div><div class="wishlist-info"><small>SKINCARE</small><h3>Daily Hydrating Face Cream</h3><div class="wishlist-price">₹749</div><a href="404.html" class="primary-btn">Add to Cart <i class="fa-solid fa-bag-shopping"></i></a></div></article>
+
+        <article class="wishlist-card"><div class="wishlist-image"><img src="assets/h15.webp" alt="Velvet lipstick"><span class="heart"><i class="fa-solid fa-heart"></i></span></div><div class="wishlist-info"><small>MAKEUP</small><h3>Velvet Matte Lipstick</h3><div class="wishlist-price">₹599</div><a href="404.html" class="primary-btn">Add to Cart <i class="fa-solid fa-bag-shopping"></i></a></div></article>
+
+        <article class="wishlist-card"><div class="wishlist-image"><img src="assets/h20.webp" alt="Floral signature perfume"><span class="heart"><i class="fa-solid fa-heart"></i></span></div><div class="wishlist-info"><small>FRAGRANCE</small><h3>Floral Signature Perfume</h3><div class="wishlist-price">₹1,299</div><a href="404.html" class="primary-btn">Add to Cart <i class="fa-solid fa-bag-shopping"></i></a></div></article>
+
+        <article class="wishlist-card"><div class="wishlist-image"><img src="assets/h17.webp" alt="Gentle face cleanser"><span class="heart"><i class="fa-solid fa-heart"></i></span></div><div class="wishlist-info"><small>SKINCARE</small><h3>Gentle Daily Face Cleanser</h3><div class="wishlist-price">₹499</div><a href="404.html" class="primary-btn">Add to Cart <i class="fa-solid fa-bag-shopping"></i></a></div></article>
+
+        <article class="wishlist-card"><div class="wishlist-image"><img src="assets/h16.webp" alt="Daily sunscreen"><span class="heart"><i class="fa-solid fa-heart"></i></span></div><div class="wishlist-info"><small>SKINCARE</small><h3>Daily Protection Sunscreen</h3><div class="wishlist-price">₹699</div><a href="404.html" class="primary-btn">Add to Cart <i class="fa-solid fa-bag-shopping"></i></a></div></article>
+
+        <article class="wishlist-card"><div class="wishlist-image"><img src="assets/h18.webp" alt="Nude makeup palette"><span class="heart"><i class="fa-solid fa-heart"></i></span></div><div class="wishlist-info"><small>MAKEUP</small><h3>Everyday Nude Palette</h3><div class="wishlist-price">₹999</div><a href="404.html" class="primary-btn">Add to Cart <i class="fa-solid fa-bag-shopping"></i></a></div></article>
+
+        <article class="wishlist-card"><div class="wishlist-image"><img src="assets/h24.webp" alt="Silky body lotion"><span class="heart"><i class="fa-solid fa-heart"></i></span></div><div class="wishlist-info"><small>BODY CARE</small><h3>Silky Nourishing Body Lotion</h3><div class="wishlist-price">₹649</div><a href="404.html" class="primary-btn">Add to Cart <i class="fa-solid fa-bag-shopping"></i></a></div></article>
+
+    </div>
+</section>
+
+<!-- PROFILE -->
+<section class="page-section" id="profile">
+    <div class="page-heading">
+        <span class="eyebrow">PERSONAL INFORMATION</span>
+        <h1>My Profile</h1>
+        <p>View your personal details, membership and account information.</p>
+    </div>
+
+    <div class="profile-layout">
+        <div class="panel profile-card">
+            <img src="assets/f1.webp" alt="Sarah Johnson" class="profile-photo">
+            <h3>Sarah Johnson</h3>
+            <p>Premium Member</p>
+            <span class="profile-badge"><i class="fa-solid fa-star"></i> Gold Member</span>
+            <div style="margin-top:20px"><a href="404.html" class="primary-btn">Edit Profile <i class="fa-solid fa-pen"></i></a></div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading"><div><h3>Personal Details</h3><p>Your registered account information</p></div></div>
+            <div class="profile-details">
+                <div class="detail-item"><small>Full Name</small><strong>Sarah Johnson</strong></div>
+                <div class="detail-item"><small>Email Address</small><strong>sarah@example.com</strong></div>
+                <div class="detail-item"><small>Phone Number</small><strong>+91 98765 43210</strong></div>
+                <div class="detail-item"><small>Member Since</small><strong>January 2025</strong></div>
+                <div class="detail-item"><small>Gender</small><strong>Female</strong></div>
+                <div class="detail-item"><small>Date of Birth</small><strong>12 June 1998</strong></div>
+                <div class="detail-item" style="grid-column:1/-1"><small>Delivery Address</small><strong>24, Green Park Street, Chennai, Tamil Nadu, India - 600001</strong></div>
+            </div>
+            <div style="margin-top:19px"><a href="404.html" class="outline-btn">Update Information <i class="fa-solid fa-arrow-right"></i></a></div>
+        </div>
+    </div>
+
+    <div class="content-grid" style="margin-top:20px">
+        <div class="panel">
+            <div class="panel-heading"><div><h3>Membership Information</h3><p>Your Velvet Glow membership</p></div></div>
+            <div class="detail-item" style="margin-bottom:12px"><small>Membership Level</small><strong>Gold Member</strong></div>
+            <div class="detail-item" style="margin-bottom:12px"><small>Reward Points</small><strong>350 Points</strong></div>
+            <div class="detail-item"><small>Account Status</small><strong>Active</strong></div>
+        </div>
+        <div class="panel">
+            <div class="panel-heading"><div><h3>Account Support</h3><p>Need assistance with your profile?</p></div></div>
+            <p style="font-size:12px;color:var(--text);line-height:1.8;margin-bottom:16px">For help with account information, delivery addresses or membership details, visit our support section.</p>
+            <a href="404.html" class="outline-btn">Contact Support <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+    </div>
+</section>
+
+<!-- SETTINGS -->
+<section class="page-section" id="settings">
+    <div class="page-heading">
+        <span class="eyebrow">ACCOUNT PREFERENCES</span>
+        <h1>Settings</h1>
+        <p>Manage your account preferences, privacy and security options.</p>
+    </div>
+
+    <div class="settings-layout">
+        <div class="panel">
+            <div class="panel-heading"><div><h3>Account Settings</h3><p>Manage your personal account</p></div></div>
+            <a href="404.html" class="settings-item"><div class="settings-item-left"><i class="fa-regular fa-user"></i><div><strong>Personal Information</strong><small>Update your account details</small></div></div><i class="fa-solid fa-chevron-right settings-arrow"></i></a>
+            <a href="404.html" class="settings-item"><div class="settings-item-left"><i class="fa-solid fa-location-dot"></i><div><strong>Saved Addresses</strong><small>Manage delivery addresses</small></div></div><i class="fa-solid fa-chevron-right settings-arrow"></i></a>
+            <a href="404.html" class="settings-item"><div class="settings-item-left"><i class="fa-solid fa-lock"></i><div><strong>Password & Security</strong><small>Manage account security</small></div></div><i class="fa-solid fa-chevron-right settings-arrow"></i></a>
+            <a href="404.html" class="settings-item"><div class="settings-item-left"><i class="fa-regular fa-credit-card"></i><div><strong>Payment Methods</strong><small>Manage payment options</small></div></div><i class="fa-solid fa-chevron-right settings-arrow"></i></a>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading"><div><h3>Preferences & Support</h3><p>Customise your shopping experience</p></div></div>
+            <a href="404.html" class="settings-item"><div class="settings-item-left"><i class="fa-regular fa-bell"></i><div><strong>Notifications</strong><small>Manage notification preferences</small></div></div><i class="fa-solid fa-chevron-right settings-arrow"></i></a>
+            <a href="404.html" class="settings-item"><div class="settings-item-left"><i class="fa-solid fa-globe"></i><div><strong>Language & Region</strong><small>Choose your preferred language</small></div></div><i class="fa-solid fa-chevron-right settings-arrow"></i></a>
+            <a href="404.html" class="settings-item"><div class="settings-item-left"><i class="fa-regular fa-circle-question"></i><div><strong>Help & Support</strong><small>Get help with your account</small></div></div><i class="fa-solid fa-chevron-right settings-arrow"></i></a>
+            <a href="404.html" class="settings-item"><div class="settings-item-left"><i class="fa-solid fa-shield-halved"></i><div><strong>Privacy Policy</strong><small>Read privacy information</small></div></div><i class="fa-solid fa-chevron-right settings-arrow"></i></a>
+        </div>
+    </div>
+
+    <div class="panel" style="margin-top:20px">
+        <div class="panel-heading"><div><h3>Account Actions</h3><p>Manage your account access</p></div></div>
+        <a href="404.html" class="danger-btn"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</a>
+    </div>
+</section>
+
+</div>
+</main>
+
+<script>
+/* DASHBOARD NAVIGATION - NO STORAGE */
+
+const sidebar = document.getElementById("sidebar");
+const menuToggle = document.getElementById("menuToggle");
+const overlay = document.getElementById("mobileOverlay");
+const headerTitle = document.getElementById("headerTitle");
+const contentArea = document.querySelector(".content-area");
+
+const navLinks = document.querySelectorAll(".nav-link");
+const sections = document.querySelectorAll(".page-section");
+
+navLinks.forEach(link => {
+    link.addEventListener("click", () => {
+        const sectionId = link.dataset.section;
+        const target = document.getElementById(sectionId);
+
+        if (!target) return;
+
+        navLinks.forEach(item => item.classList.remove("active"));
+        sections.forEach(item => item.classList.remove("active"));
+
+        link.classList.add("active");
+        target.classList.add("active");
+
+        headerTitle.textContent = link.textContent.trim();
+        contentArea.scrollTop = 0;
+
+        closeSidebar();
+    });
+});
+
+function openSidebar(){
+    sidebar.classList.add("open");
+    overlay.classList.add("show");
+    document.body.style.overflow = "hidden";
+}
+
+function closeSidebar(){
+    sidebar.classList.remove("open");
+    overlay.classList.remove("show");
+    document.body.style.overflow = "";
+}
+
+menuToggle.addEventListener("click", openSidebar);
+overlay.addEventListener("click", closeSidebar);
+
+document.addEventListener("keydown", event => {
+    if(event.key === "Escape") closeSidebar();
+});
+
+/* Content buttons navigate to 404 */
+document.querySelectorAll("[data-go-404]").forEach(button => {
+    button.addEventListener("click", () => {
+        window.location.href = "404.html";
+    });
+});
+</script>
+
+</body>
+</html>
